@@ -7,3 +7,4 @@ A Django sample application is also available for the article at [https://github
 If you need an Azure account, you can [create on for free](https://azure.microsoft.com/en-us/free/).
 
 
+
