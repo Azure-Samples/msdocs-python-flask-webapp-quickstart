@@ -5,3 +5,5 @@ This is the sample Flask application for the Azure Quickstart [Deploy a Python (
 A Django sample application is also available for the article at [https://github.com/Azure-Samples/msdocs-python-django-webapp-quickstart](https://github.com/Azure-Samples/msdocs-python-django-webapp-quickstart).
 
 If you need an Azure account, you can [create on for free](https://azure.microsoft.com/en-us/free/).
+
+
