@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  body{
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    </style>
+
+<div class="card d-flex justify-content-center  align-items-center o-hidden border-3 lg my-5">
+  <div class="card-body p-0">
+    <!-- Nested Row within Card Body -->
+    <div class="row d-flex justify-content-center  align-items-center">
+      <div class="col-lg-5 d-none d-lg-block">
+        <img src="/static/img/resume.png" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="col-lg-7">
+        <div class="p-5">
+          <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Registro de Usuario</h1>
+          </div>
+          <form class="user" action="/addregistro" method="POST">
+            <div class="form-group row">
+              <div class="col-sm-6 mb-3 mb-sm-0">
+                <input type="text" class="form-control form-control-user mb-3" id="nombre1" name="nombre"
+                  placeholder="Nombres">
+              </div>
+              <div class="col-sm-6">
+                <input type="text" class="form-control form-control-user mb-3" id="nombre2" name="apellido"
+                  placeholder="Apellidos">
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control form-control-user mb-3" id="usuario" name="email"
+                placeholder="Email">
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-6 mb-3 mb-sm-0">
+                <input type="password" class="form-control form-control-user mb-3" id="pass1" name="pass1"
+                  placeholder="Contraseña">
+              </div>
+              <div class="col-sm-6">
+                <input type="password" class="form-control form-control-user mb-3" id="exampleRepeatPassword"
+                  name="pass2" placeholder="Confirmar Contraseña">
+              </div>
+            </div>
+            <button class="btn btn-primary btn-user btn-block" type="submit">Enviar</button>
+            <!--  <hr>
+                <a href="index.html" class="btn btn-google btn-user btn-block">
+                  <i class="fab fa-google fa-fw"></i> Register with Google
+                </a>
+                <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                  <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                </a>
+              </form>
+              <hr> -->
+          </form>
+          <hr>
+          <div class="text-center">
+            <a class="small" href="{{url_for('login')}}">Ingresar al Sistema</a>
+          </div>
+          <hr>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          {% for message in messages %}
+
+          <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <h4 class="alert-heading">Alerta!!!</h4>
+            <p class="mb-0">{{message}}</a>.</p>
+          </div>
+
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</div>
+
+{% endblock %}

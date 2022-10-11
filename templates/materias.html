@@ -1,0 +1,88 @@
+{% extends 'menu.html' %}
+
+{% block content1 %}
+<div onshow="cargarInfo();" class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-2 my-1">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Gestion de Materias</h1>
+                            </div>
+                            <form class="user" action="/usuarios" method="POST">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user mb-3" id="nombre1"
+                                            name="nombre1" placeholder="Codigo">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user mb-3" id="nombre2"
+                                            name="nombre2" placeholder="Descripcion">
+                                    </div>
+                                </div>
+                                
+                              
+                                <div class="d-flex gap-2">
+                                    <button id="boton-accion" class="btn btn-primary" type="button"
+                                        onclick="verdatos();">Agregar</button>
+                                    <button class="btn btn-danger" type="button"
+                                        onclick="vercancelar()">Cancelar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-1 my-1">
+                <div class="card-body p-0">
+                    <div class="p-3">
+                       
+                        <table id="usuarios2" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Descripcion</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listado"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    window.onload = function () {
+        verdatosmaterias();
+    }
+</script>
+
+
+{% endblock %}

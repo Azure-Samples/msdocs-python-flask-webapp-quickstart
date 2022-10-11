@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <title>Página Principal</title>
+
+    
+
+    
+    
+    <!-- Favicons -->
+
+
+
+    <style>
+      .formulario{
+    width: 400px;
+    text-align: left;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+    background-color: white;
+    font-family: Arial;
+}
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    
+<main class="form-signin w-100 m-auto">
+  <form>
+    <img class="mb-4" src="/static/img/logo-Universidad-Nacional.png" alt="logo_universidad" width="200" height="100">
+    <br>
+    <br>
+    <br>
+        <h1 class="h1 mb-3 fw-normal">¿Has olvidado la contraeña?</h1>
+
+    <h6 class="mb-3 fw-normal">Nueva contraseña</h6>
+
+
+    <div class="formulario form-group">
+    <label for="floatingInput">CORREO ELECTRÓNICO</label>
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+     <br>
+    </div>
+
+    </div>
+    
+    
+    <a onclick="" href="{{url_for('login1')}}" class="w-30 btn btn-lg btn-dark type=submit">Atras</a>
+    <a onclick="" href="#" class="w-30 btn btn-lg btn-dark type=submit">Enviar</a>
+    <div>
+        
+    </form>
+</main>
+
+{% endblock %}

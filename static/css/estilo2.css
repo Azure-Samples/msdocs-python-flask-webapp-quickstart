@@ -1,0 +1,65 @@
+div{
+    text-align: center;
+    font-family: Verdana;
+}
+
+.verde{
+    background-color: rgb(152, 216, 152);
+}
+
+.izquierda{
+    text-align: left;
+}
+
+.menu{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #BDC3C7;
+}
+
+li{
+    float:left;
+}
+
+li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-family: Tahoma;
+    text-decoration: none;
+}
+
+li a:hover{
+    background-color: #797D7F;
+}
+
+.centrar{
+    text-align: center;
+}
+
+.tabla{
+    width: 100%;
+}
+table, th, td{
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+th{
+    background-color: cadetblue;
+    text-align: center;
+    padding: 10px;
+}
+
+td{
+    background-color: cornflowerblue;
+    text-align: center;
+}
+
+#listadoestudiantes{
+    color: cadetblue;
+    text-align: center;
+}

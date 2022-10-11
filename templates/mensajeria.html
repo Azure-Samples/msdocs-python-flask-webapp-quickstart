@@ -1,0 +1,123 @@
+{% extends 'menu.html' %}
+
+{% block content1 %}
+<div onshow="cargarInfo();" class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-2 my-1">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Mensajeria Min Tic Ciclo 3</h1>
+                            </div>
+                            <form class="user" action="/enviarmensajes" method="POST">
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user mb-3" id="nombre1"
+                                            name="asunto" placeholder="Asunto">
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <select class="form-select mb-3" aria-label="Default select example" id="rol"
+                                            name="destinatario">
+                                            <option value="seleccione" selected>Seleccione un Destinatario</option>
+                                            {% for user in datauser %}
+                                            <option value="{{user['usuario']}}">{{ user['nombre'].upper() }} {{
+                                                user['apellido'].upper() }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user mb-3" id="pass"
+                                            name="cuerpo" placeholder="Cuerpo del Mensaje">
+                                    </div>
+
+                                </div>
+
+
+                                <div class="d-flex gap-2">
+                                    <button id="boton-accion" class="btn btn-primary mb-3" type="submit">Enviar</button>
+
+                                </div>
+                            </form>
+
+
+                            {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                            {% for message in messages %}
+
+                            <div class="alert alert-dismissible alert-info">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                <h4 class="alert-heading">Alerta!!!</h4>
+                                <p class="mb-0">{{message}}</a>.</p>
+                            </div>
+
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-1 my-1">
+                <div class="card-body p-0">
+                    <div class="p-3">
+
+                        <table id="usuarios2" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Remitente</th>
+                                    <th>Destinatario</th>
+                                    <th>Fecha</th>
+                                    <th>Asunto</th>
+                                    <th>Mensaje</th>
+                                    <th>Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listado"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    window.onload = function () {
+        verdatos();
+    }
+</script>
+
+
+{% endblock %}
