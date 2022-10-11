@@ -10,9 +10,9 @@ def enviar_email(email_destino, codigo):
     email = EmailMessage()
     email['From'] = remitente
     email['To'] = destinatario
-    email['Subject'] = 'Confirmación de Correo'
+    email['Subject'] = 'Coonfirmación de Correo'
     email.set_content("Bienvenido, Para Confirmar su cuenta Ingrese el Siguiente Codigo. \n codigo de verificación: " +
-                      codigo+" \n Recuerde ingresar este codigo para poder validar su cuenta")
+                      codigo+" \n Recuerde ingresar este codigo para poder valisar si cuenta")
     # email.set_content(mensaje)
     smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
     smtp.starttls()

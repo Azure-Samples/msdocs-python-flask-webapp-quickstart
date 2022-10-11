@@ -15,7 +15,7 @@ app.secret_key = 'mi clave de secreta'+str(datetime.now)
 
 
 #########Recuperar la informacion desde los formularios#####
-###Recuperar y Almacenar los Registros de usuario######################
+###Recuperar y Almancenar los Registros de usuario######################
 
 @app.route('/restablecerclave', methods=['POST'])
 def restablece_clave():
@@ -215,18 +215,13 @@ def add_materia():
 #####################Rutas de Navegacion#######################################
 @app.route('/')
 def index():
-    return render_template('login1.html')
+    return render_template('login.html')
 
 
 @app.route('/login')
 def login():
     session.clear()
     return render_template('login.html')
-
-
-@app.route('/login1')
-def login1():
-    return render_template('login1.html')
 
 
 @app.route('/registro')
@@ -261,10 +256,6 @@ def restablecer(usuario=None):
 @app.route('/mensajes')
 def mensajes():
     return render_template('mensajes.html')
-
-@app.route('/clave')
-def recordar_clave():
-    return render_template('clave.html')
 
 # @app.route('/menu')
 # @app.route('/menu/<username>/')
