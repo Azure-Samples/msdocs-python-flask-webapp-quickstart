@@ -1,0 +1,32 @@
+.fondo{
+    background-color: cadetblue;
+}
+
+.titulos{
+    color: white;
+    text-align: center;
+    font-family: Impact;
+    font-size: 25px;
+}
+
+#formulario{
+    width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+    background-color: coral;
+    font-family: Tahoma;
+}
+
+form input{
+    padding:3px 10px;
+    border:1px solid white;
+    border-radius: 10px;
+    margin: 8px 10px;
+    display: inline-block;
+}
+
+.botones{
+    text-align: center;
+    font-weight: bold;
+}

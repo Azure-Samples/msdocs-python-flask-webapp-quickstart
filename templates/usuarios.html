@@ -1,0 +1,114 @@
+{% extends 'menu.html' %}
+
+{% block content1 %}
+<div onshow="cargarInfo();" class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-2 my-1">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Gestion de Usuarios</h1>
+                            </div>
+                            <form class="user" action="/usuarios" method="POST">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user mb-3" id="nombre1"
+                                            name="nombre1" placeholder="Nombres">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user mb-3" id="nombre2"
+                                            name="nombre2" placeholder="Apellidos">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="email" class="form-control form-control-user mb-3" id="usuario"
+                                            name="usuario" placeholder="Email">
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select class="form-select" aria-label="Default select example" id="rol">
+                                            <option value="seleccione" selected>Seleccione</option>
+                                            <option value="Docente">Docente</option>
+                                            <option value="Estudiante">Estudiante</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user mb-3" id="pass"
+                                            name="pass" placeholder="Contraseña">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="exampleRepeatPassword" placeholder="Repetir Contraseña">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="d-flex gap-2">
+                                    <button id="boton-accion" class="btn btn-primary" type="button"
+                                        onclick="verdatos();">Agregar</button>
+                                    <button class="btn btn-danger" type="button"
+                                        onclick="vercancelar()">Cancelar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-1 my-1">
+                <div class="card-body p-0">
+                    <div class="p-3">
+
+                        <table id="usuarios2" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>User Id</th>
+                                    <th>Titulo</th>
+                                    <th>Detalle</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listado"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    window.onload = function () {
+        verdatos();
+    }
+</script>
+
+
+{% endblock %}

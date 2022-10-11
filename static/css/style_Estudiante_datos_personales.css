@@ -1,0 +1,233 @@
+
+html, body {  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+  margin:0px;  
+  height:100%;  
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables*/
+:root {
+    --color_home:#111e38;
+    --color_text_side_bar: white;
+    --color_text_selection: black;
+    --color1:#00377a;
+    --color2:#929aae;
+    --color3:#00b3ff;
+    --color4:#e6eced;
+    --color5:#a2abc277;
+  }
+
+/* --- Grid Layout--- */
+body{
+    /*background-color: antiquewhite;*/
+    text-align: center;
+    height: 100%;
+}
+
+.caja{
+    /*border: 2px solid black;
+    background-color: rgb(192, 187, 187);*/
+    text-align: center;
+}
+
+.grid-layout{
+    grid-template-areas: 'side_bar profile_ profile_ profile_ logo_ '
+                          'side_bar image_ image_ blank_ blank_ '
+                          'side_bar form_ form_ form_ form_'
+                          'side_bar footer_ footer_ footer_ footer_';
+
+    grid-template-rows: 20% 15% 55% auto;
+    grid-template-columns: 15% auto auto auto 30%;
+    height: 100%;
+    display:grid;
+
+}
+
+.side_bar{
+    grid-area:side_bar;
+    /*background-color: aqua;*/
+    
+}
+
+.profile_ {
+    grid-area:profile_;
+    /*background-color: lightgreen;*/
+}
+
+.logo_{
+    grid-area:logo_;
+    /*background-color: lightsalmon;*/
+}
+
+.image_{
+    grid-area:image_;
+    /*background-color: lightseagreen;*/
+}
+
+.form_{
+    grid-area:form_;
+    /*background-color: cornflowerblue;*/
+}
+.blank_{
+    grid-area:blank_;
+    /*background-color: white;*/
+}
+
+.footer_{
+    grid-area:footer_;
+    /*background-color: yellow;*/
+}
+
+
+/* --- Side-bar--- */
+
+.side_bar {
+  background-color: var(--color1) ;
+  height: 100%;
+}
+
+
+.seccion_1{
+  background-color: var(--color_home) ;
+  height: 8%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.seccion_2{
+    height: 92%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Sidebar links */
+.side_bar a {
+display: flex;
+  color: var(--color_text_side_bar);
+  padding: 16px;
+  text-decoration: none;
+}
+
+/* Links on mouse-over */
+.side_bar .seccion_2 a:hover:not(.active) {
+  background-color: var(--color4);
+  color: var(--color_text_selection);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  border-radius: 8px;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 100%;
+}
+
+/* Profile */
+
+.profile_{
+display: flex;
+align-items: center;
+background-color: var(--color5);
+border-bottom: 2px solid black;
+border-top: 2px solid black;
+}
+
+.texto_perfil{
+  width: 170%;
+}
+
+.logo_estudiante{
+  width: 100%;
+  height: 100%;
+}
+
+.icono_estudiante{
+  width: auto;
+  height: 100%;
+  border: 2px solid black;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+/* Logo universidad*/
+
+.logo_{
+  background-color: var(--color5);
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+}
+.logo_universidad{
+  width: auto;
+  height: 100%;
+  padding: 20px;
+ 
+  
+}
+
+/* Profile */
+.image_{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  }
+  
+  .texto_foto{
+    width: 100%;
+  }
+  
+  .logo_camara{
+    width: 100%;
+    height: 100%;
+  }
+  
+  .icono_camara{
+    padding:5px;
+    width: auto;
+    height: 100%;   
+    border-radius: 50%;
+    border: 2px solid black;
+  }
+
+  /* Footer */
+
+  .footer_{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .btn_actualizar {
+    background-color:var(--color1);
+    border-radius:10px;
+    border:1px solid #0b0e07;
+    display:inline-block;
+    cursor:pointer ;
+    color:#ffffff;
+    padding:9px 12px;
+    text-decoration:none;
+  }
+
+  .btn_actualizar:hover:not(.active) {
+    background-color:#42b968 ;
+    color: var(--color_text_selection);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    border-radius: 8px;
+  }
+
+  
+  .btn_actualizar:active {
+    position:relative;
+    top:2px;
+  }

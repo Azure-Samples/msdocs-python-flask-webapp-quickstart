@@ -1,0 +1,148 @@
+{% extends 'menu.html' %}
+
+{% block content1 %}
+<div onshow="cargarInfo();" class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-2 my-1">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Gestion de Calificaciones</h1>
+                            </div>
+                            <form class="user" action="/usuarios" method="POST">
+                                
+                                <div class="form-group row">
+                                                                           
+                                    <div class="col-sm-6 mb-3 mb-sm-0 mb-3"> 
+                                        <select class="form-select" aria-label="Default select example" id="rol">
+                                            <option value="seleccione" selected>Seleccione</option>
+                                            <option value="Docente">Desarrollo de Sotfware</option>
+                                            <option value="Estudiante">Ingles</option>
+                                            <option value="Estudiante">Coaching</option>
+                                        </select>
+                                    </div>
+                                    
+                                        <div class="col-sm-6 mb-3 mb-sm-0 mb-3">
+                                            <select class="form-select mb-3" aria-label="Default select example" id="rol">
+                                                <option value="seleccione" selected>Seleccione</option>
+                                                <option value="Docente">Estudiante 1</option>
+                                                <option value="Estudiante">Estudiante 2</option>
+                                                <option value="Estudiante">Estudiante 3</option>
+                                                <option value="Estudiante">Estudiante 4</option>
+                                                <option value="Docente">Estudiante 5</option>
+                                                <option value="Estudiante">Estudiante 6</option>
+                                                <option value="Estudiante">Estudiante 7</option>
+                                                <option value="Estudiante">Estudiante 8</option>
+                                                <option value="Estudiante">Estudiante 9</option>
+                                                <option value="Estudiante">Estudiante 10</option>
+                                                                                            
+                                            </select>
+                                   
+                                </div>
+                            </div>  
+                            
+
+                                <div class="form-group row">
+                                   
+                                 
+                                        <div class="col-sm-6 mb-3 mb-sm-0 mb-3">
+                                            <select class="form-select mb-3" aria-label="Default select example" id="rol">
+                                                <option value="seleccione" selected>Seleccione</option>
+                                                <option value="Docente">Actividad 1</option>
+                                                <option value="Estudiante">Actividad 2</option>
+                                                <option value="Estudiante">Actividad 3</option>
+                                                <option value="Estudiante">Actividad 4</option>
+                                                <option value="Docente">Actividad 5</option>
+                                                <option value="Estudiante">Actividad 6</option>
+                                                <option value="Estudiante">Actividad 7</option>
+                                                <option value="Estudiante">Actividad 8</option>
+                                                <option value="Estudiante">Actividad 9</option>
+                                                <option value="Estudiante">Actividad 10</option>
+                                                                                            
+                                            </select>
+                                        </div>
+
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user mb-3" id="nombre1"
+                                                name="nombre1" placeholder="Calificacion">
+                                        </div>
+                           
+                                                                   
+                                </div>
+
+                                <div class="form-group row">
+                                                                                                          
+                                        <div class="col-sm-12 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user mb-3" id="nombre1"
+                                                name="nombre1" placeholder="Retroalimentacion">
+                                        </div>
+                                </div>
+                               
+                                                        
+
+                                <div class="d-flex gap-2">
+                                    <button id="boton-accion" class="btn btn-primary" type="button"
+                                        onclick="verdatos();">Calificar</button>
+                                    <button class="btn btn-danger" type="button"
+                                        onclick="vercancelar()">Cancelar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-1 my-1">
+                <div class="card-body p-0">
+                    <div class="p-3">
+                       
+                        <table id="usuarios2" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Docente</th>
+                                    <th>Materia</th>
+                                    <th>Estudiantes</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listado"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    window.onload = function () {
+        verdatos();
+    }
+</script>
+
+
+{% endblock %}
