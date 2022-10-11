@@ -18,6 +18,8 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
+                                    <br>
+                                    <br>
                                     <h1 class="h4 text-gray-900 mb-4">Verifique su Cuenta</h1>
                                 </div>
                                 <form class="user" action="/activar" method="post">
@@ -30,14 +32,16 @@
                                             id="exampleInputPassword" name="codverificacion"
                                             placeholder="Ingrese el codigo">
                                     </div>
-
-                                    <button class="btn btn-outline-secondary" id="alertas" type="submit">Validar
+                                    <br>
+                                    <button class="w-20 btn btn-dark" id="alertas" type="submit">Validar
                                         Cuenta</button>
+                                    <a onclick="" href="{{url_for('login')}}" class="w-20 btn btn-dark" type="submit">Atras</a>
 
                                 </form>
 
                                 <div class="text-center">
-                                    <a class="small" href="{{ url_for('login') }}">Ingresar al sistema</a>
+                                    
+                                    <!-- <a class="small" href="{{ url_for('login') }}">Ingresar al sistema</a> -->
                                 </div>
                                 <hr>
                                 {% with messages = get_flashed_messages() %}

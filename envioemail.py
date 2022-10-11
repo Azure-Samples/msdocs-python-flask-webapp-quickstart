@@ -12,7 +12,7 @@ def enviar_email(email_destino, codigo):
     email['To'] = destinatario
     email['Subject'] = 'Coonfirmación de Correo'
     email.set_content("Bienvenido, Para Confirmar su cuenta Ingrese el Siguiente Codigo. \n codigo de verificación: " +
-                      codigo+" \n Recuerde ingresar este codigo para poder valisar si cuenta")
+    codigo+" \n Recuerde ingresar este codigo para poder valisar si cuenta")
     # email.set_content(mensaje)
     smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
     smtp.starttls()
@@ -27,7 +27,7 @@ def recuperar_email(email_destino):
     mensaje="<hr>"
     mensaje = "<h2>Recuperación de Cuenta</h2>"
     mensaje = mensaje + "<a href='http://localhost:5000/restablecer/" + email_destino + \
-        "'>Ingrese Aquí para restablecer su Contraseña</a>"
+    "'>Ingrese Aquí para restablecer su Contraseña</a>"
     mensaje=mensaje+ "<hr>"
     email = EmailMessage()
     email['From'] = remitente

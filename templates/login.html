@@ -8,7 +8,7 @@
   
   body{
     width: 100vw;
-    <style>
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,10 +49,11 @@
 
                 </form>
                 <div class="text-center">
-                  <a class="small" href="{{ url_for('registro') }}">Registrarse</a>
+                  <br>
+                  <a class="small link-dark" href="{{ url_for('registro') }}">Registrarse</a>
                 </div>
                 <div class="text-center">
-                  <a class="small" href="{{ url_for('recuperar') }}">Olvide mi Contraseña</a>
+                  <a class="small link-dark" href="{{ url_for('recuperar') }}">¿Has olvidado tu constraseña?</a>
                 </div>
                 <hr>
                 {% with messages = get_flashed_messages() %}

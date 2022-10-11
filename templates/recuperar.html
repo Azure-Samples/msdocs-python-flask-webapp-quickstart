@@ -30,6 +30,7 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
+                                    <br>
                                     <h1 class="h4 text-gray-900 mb-4">Recuperar Contraseña</h1>
                                 </div>
                                 <form class="user" action="/validaremail" method="post">
@@ -40,13 +41,15 @@
 
 
 
-                                        <button class="btn btn-outline-secondary" id="alertas" type="submit">Recuperar
+                                        <button class="w-20 btn btn-dark" id="alertas" type="submit">Recuperar
                                             Contraseña</button>
+                                        <a onclick="" href="{{url_for('login')}}" class="w-20 btn btn-dark" type="submit">Atras</a>
 
                                 </form>
-                                <hr>
+                                
                                 <div class="text-center">
-                                    <a class="small" href="{{ url_for('login') }}">Ingresar al sistema</a>
+                                    
+                                    <!--<a class="small" href="{{ url_for('login') }}">Ingresar al sistema</a>-->
                                 </div>
                                 <hr>
                                 {% with messages = get_flashed_messages() %}

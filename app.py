@@ -11,6 +11,7 @@ from envioemail import enviar_email
 
 app = Flask(__name__)
 
+
 app.secret_key = 'mi clave de secreta'+str(datetime.now)
 
 
@@ -318,3 +319,4 @@ def proteger_rutas():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
