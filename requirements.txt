@@ -1,2 +1,5 @@
 Flask==2.0.2
 gunicorn
+azure.storage.blob
+azure.core
+jinja2

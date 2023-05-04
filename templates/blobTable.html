@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>Missing title</title>
+        {% endif %}
+        
+    </head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='jjo/mycss.css')}}">
+    <body>
+        <div class="grid">Welcome to the testbench</div>
+        <div class="gridA">Extra stuff: View files</div>
+        <p></p>
+        <a href="{{url_for('index')}} "> Home</a>
+        <a href="{{url_for('listblob')}} "> View files</a> 
+        <hr> 
+        <center>
+        <table id="tableData" border="1" cellpadding="2">
+        <tr>    
+        {% for x in img_html %}
+        <td><img src=" {{ x }}  "  width='auto' height='200' ></td>
+        {% endfor %}
+        </tr>
+        </table>
+        </center>  
+    </body>
+</html>

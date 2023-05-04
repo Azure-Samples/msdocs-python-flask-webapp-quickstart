@@ -1,0 +1,13 @@
+ul.a {
+    list-style-type: square ;
+}
+.grid {
+    padding: 15px;
+    background-color: steelblue;
+    color: white;
+}
+.gridA {
+    padding: 12px;
+    background-color: lightsteelblue;
+    color: black;
+}
