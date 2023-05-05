@@ -48,7 +48,7 @@ def table():
 @app.route('/listblob')
 def listblob():
     blob_list = container.list_blobs()
-    return render_template('ListxBlob.html', title='Lister Blobs', blob_list=blob_list)
+    return render_template('testListBlob.html', title='Lister Blobs', blob_list=blob_list)
 
 
 if __name__ == '__main__':
