@@ -1,5 +1,5 @@
 import os
-
+from ultralytics import YOLO
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 
@@ -19,6 +19,11 @@ def upload():
 
     # Do something with the image data (e.g. save it to disk, process it, etc.)
     # ...
+
+    ## Use Trained Model ##
+    model = YOLO("fruitscanner-python-flask-webapp/model/best.pt")
+    result = model(image, conf=0.2)
+    print(result)
 
     # Return a response to the Maui application
     return 'Image received!'
