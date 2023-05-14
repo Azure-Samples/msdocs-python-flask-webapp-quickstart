@@ -1,5 +1,5 @@
 import os
-
+from ultralytics import YOLO
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 
@@ -10,6 +10,23 @@ app = Flask(__name__)
 def index():
    print('Request for index page received')
    return render_template('index.html')
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    # Handle the image data sent from the Maui application
+    image = request.files['file']
+    image_bytes = image.read()
+
+    # Do something with the image data (e.g. save it to disk, process it, etc.)
+    # ...
+
+    ## Use Trained Model ##
+    model = YOLO("fruitscanner-python-flask-webapp/model/best.pt")
+    result = model(image, conf=0.2)
+    print(result)
+
+    # Return a response to the Maui application
+    return 'Image received!'
 
 @app.route('/favicon.ico')
 def favicon():
