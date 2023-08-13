@@ -1,0 +1,111 @@
+<!doctype html>
+
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+  <style>
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+
+<div class="card-header text-white" style="background-color:rgb(27, 27, 27);">
+  <div class="topnav">
+    <a class="form-label fw-bold text-white" width="100" height="100"
+      style="margin-left:50px; margin-right:20px; text-decoration: none; font-size: 17px;" href="/">Home</a>
+    <a class="form-label fw-bold text-white" width="100" height="100"
+      style="margin-left:30px; margin-right:20px; text-decoration: none; font-size: 17px;" href="mips">Mip List</a>
+  </div>
+</div>
+
+<html>
+
+<body>
+  <main class="login-container">
+
+    <div class="card shadow-lg" style="margin-top:10px; margin-right:50px; margin-left:10px;">
+      <div class="card-header bg-secondary text-white">
+        <h3 class="mb-0">New Engineer</h3>
+      </div>
+      <form method="post" action="{{url_for('save')}}">
+        <div class="col-md-6 mx-auto text-center">
+
+          <label for="engineerID" class="form-label fw-bold fs-5">Engineer Name</label>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+            <input type="text" required class="form-control" id="engineerNameNew" name="engineerNameNew"
+              style="max-width: 256px;">
+          </div>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
+            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="card shadow-lg">
+      <div class="card-header bg-secondary text-white">
+        <h3 class="mb-0">Engineer Login</h3>
+      </div>
+
+      <form method="post" action="{{url_for('index')}}">
+        <div class="col-md-6 mx-auto text-center">
+          <label for="engineerID" class="form-label fw-bold fs-5">Engineer ID</label>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+            <input type="text" required class="form-control" id="engineerID" name="engineerID"
+              style="max-width: 400px;">
+          </div>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
+            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Login</button>
+          </div>
+        </div>
+      </form>
+
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+    </div>
+
+    <div class="card" style="margin-top:10x; margin-right:10px; margin-left:50px;">
+      <div class="card shadow-lg">
+        <div class="card-header bg-secondary text-white">
+          <h3 class="mb-0">Engineer List</h3>
+        </div>
+
+        <div class="card-body" style="height: 400px; width: 400px; overflow-y: auto;">
+          <ul class="list-group">
+            {% for engineer in list_engineers %}
+            <li class="list-group-item" onclick="location.href='{{ url_for('engdash', engineer_id=engineer[0]) }}'">
+
+              <tr>
+                <ul>
+                  <td style="right:20px">{{engineer[0]}} : </td>
+                  <td>{{engineer[1]}}</td>
+                </ul>
+              </tr>
+
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</body>
+
+</html>

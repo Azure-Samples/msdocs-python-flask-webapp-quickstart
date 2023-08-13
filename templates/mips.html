@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+</head>
+
+<div class="card-header text-white" style="background-color:rgb(0, 0, 0);">
+    <div class="topnav">
+        <a class="form-label fw-bold text-white" width="100" height="100"
+            style="margin-left:50px; margin-right:20px; text-decoration: none; font-size: 17px;" href="/">Home</a>
+        <a class="form-label fw-bold text-white" width="100" height="100"
+            style="margin-left:30px; margin-right:20px; text-decoration: none; font-size: 17px;" href="mips">Mip
+            List</a>
+    </div>
+</div>
+
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg" style="top:30px;">
+                <div class="card-header text-white" style="background-color:rgb(0 164 239);">
+                    <h3 class="mb-0">MIP List</h3>
+                </div>
+
+                <div class="card-body" style="height: 500px; width: 600; overflow-y: auto;">
+                    <ul class="list-group">
+                        {% for mip in list_mips %}
+                        <li class="list-group-item" onclick="location.href='{{ url_for('paths', mip_id=mip[0]) }}'">
+                            {{ mip[1] }}
+
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>

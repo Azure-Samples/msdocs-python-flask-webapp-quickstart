@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+</head>
+
+<body>
+
+
+  <div class="card-header text-white" style="background-color:rgb(27, 27, 27);">
+    <div class="topnav">
+      <a class="form-label fw-bold text-white" width="100" height="100"
+        style="margin-left:50px; margin-right:20px; text-decoration: none; font-size: 17px;" href="/">Home</a>
+      <a class="form-label fw-bold text-white" width="100" height="100"
+        style="margin-left:30px; margin-right:20px; text-decoration: none; font-size: 17px;" href="mips">Mip List</a>
+    </div>
+  </div>
+
+
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+
+        <div class="card shadow-lg mb-4">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Engineering Dashboard</h3>
+          </div>
+          <div class="card-body">
+            <h1 class="display-4">Welcome, {{ engineer[1] }}!</h1>
+          </div>
+        </div>
+
+        <div class="card shadow-lg mb-4">
+          <a href="/edit/{{engineer[0]}}" class="btn btn-secondary btn-sm">edit</a>
+          <a href="/delete/{{engineer[0]}}" class="btn btn-danger btn-delete btn-sm">delete</a>
+        </div>
+
+
+
+        <div class="card shadow-lg">
+          <div class="card-header bg-secondary text-white">
+            <h3 class="mb-0">MIP List</h3>
+          </div>
+          <div class="card-body" style="height: 420px; overflow-y: auto;">
+            <ul class="list-group">
+              {% for mip in mips %}
+              <li class="list-group-item" onclick="location.href='{{ url_for('paths', mip_id=mip[0]) }}'">
+                {{ mip[1] }}
+                <div class="right">
+                  <a href="/edit_mip/{{mip[0]}}" class="btn btn-sm text-black"
+                    style="background-color:rgb(147, 147, 147); font-size: 15px">edit</a>
+                  <a href="/delete_mip/{{mip[0]}}" class="btn btn-delete btn-s text-black"
+                    style="background-color:rgb(232, 125, 125);font-size: 14px">delete</a>
+                  <a href="/add_mip/{{mip[0]}}" class="btn btn-delete btn-s text-black"
+                    style="background-color:rgb(129, 180, 247);font-size: 14px">add</a>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="card shadow-lg text-center" style="top:10px;">
+          <div class="card-header bg-secondary text-white">
+            <h3 class="mb-0">{{engineer[1]}}'s Learning Paths</h3>
+          </div>
+          <div class="card-body" style=" overflow-y: auto;">
+            <ul class="list-group">
+              <div class="col-md-8">
+                <table id="example" class="table table-striped table-bordered" style="width:150%; top:20px">
+                  <thead>
+                    <tr>
+                      <td>Engineer Name</td>
+                      <td>Learning Path Name</td>
+                      <td>Learning Path Step Name</td>
+                      <td>Is Complete</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for row in list_par %}
+                    <tr>
+                      <td>{{row[0]}}</td>
+                      <td>{{row[1]}}</td>
+                      <td>{{row[2]}}</td>
+                      <td>{{row[3]}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="card shadow-lg text-center" style="top:30px;">
+          <div class="card-header bg-secondary text-white">
+            <h3 class="mb-0">{{engineer[1]}} Number of Completed Paths</h3>
+          </div>
+          <div class="card-body" style=" overflow-y: auto;">
+            <ul class="list-group">
+              <div class="col-md-8">
+                <table id="example" class="table table-striped table-bordered" style="width:150%;top:20px">
+                  <thead>
+                    <tr>
+                      <td>Learning Path Name</td>
+                      <td>Number of uncompleted LP</td>
+                      <td>Number of completed LP</td>
+                      <td>Path Completion</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for row in list_complete %}
+                    <tr>
+                      <td>{{row[0]}}</td>
+                      <td>{{row[1]}}</td>
+                      <td>{{row[2]}}</td>
+                      <td>{{row[3]}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

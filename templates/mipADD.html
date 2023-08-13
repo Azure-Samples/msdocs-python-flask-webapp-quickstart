@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+</head>
+
+<body>
+
+
+    <div class="card-header text-white" style="background-color:rgb(27, 27, 27);">
+        <div class="topnav">
+            <a class="form-label fw-bold text-white" width="100" height="100"
+                style="margin-left:50px; margin-right:20px; text-decoration: none; font-size: 17px;" href="/">Home</a>
+            <a class="form-label fw-bold text-white" width="100" height="100"
+                style="margin-left:30px; margin-right:20px; text-decoration: none; font-size: 17px;" href="mips">Mip
+                List</a>
+        </div>
+    </div>
+
+    <div class="card shadow-lg text-center">
+        <div class="card-header bg-secondary text-white">
+            <h3 class="mb-0">Add New MIP</h3>
+        </div>
+        <form method="post" action="{{url_for('save_mip')}}">
+            <div class="col-md-6 mx-auto text-center">
+                <label for="mipID" class="form-label fw-bold fs-5">MIP Name</label>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+                    <input type="text" required class="form-control" id="mipNameNew" name="mipNameNew"
+                        style="max-width: 256px;">
+                </div>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
+                    <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Save</button>
+                </div>
+            </div>
+    </div>
+    </form>

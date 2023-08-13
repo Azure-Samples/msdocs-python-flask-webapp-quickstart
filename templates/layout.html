@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+    id="bootstrap-css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container pt-4">
+    {% block body %}
+    {% endblock %}
+  </div>
+
+  <script>
+    const btnDelete = document.querySelectorAll('.btn-delete');
+    if (btnDelete) {
+      const btnArray = Array.from(btnDelete);
+      btnArray.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          if (!confirm('Are you sure you want to delete it?')) {
+            e.preventDefault();
+          }
+        });
+      })
+    }
+
+    $(document).ready(function () {
+      $('#example').DataTable({
+        "aLengthMenu": [[3, 5, 10, 25, -1], [3, 5, 10, 25, "All"]],
+        "iDisplayLength": 3
+      }
+      );
+    });
+
+  </script>
+</body>
+
+</html>
