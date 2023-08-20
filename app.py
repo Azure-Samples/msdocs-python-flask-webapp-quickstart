@@ -7,7 +7,7 @@ from psycopg2 import pool
 app = Flask(__name__)
 app.secret_key = 'your secret key2' 
 
-#Database connection
+#Make database connection
 minconn = 3
 maxconn = 10
 conn_pool = psycopg2.pool.SimpleConnectionPool(minconn, maxconn, 
