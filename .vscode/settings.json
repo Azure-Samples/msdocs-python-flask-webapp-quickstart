@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/d279e456-22f9-4cd6-a146-74abc46e5ea9/resourceGroups/web-app/providers/Microsoft.Web/sites/msdocs-python-webapp-quickstart-sal",
+    "appService.deploySubpath": "."
+}
