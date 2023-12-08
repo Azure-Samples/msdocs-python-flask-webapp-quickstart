@@ -1,0 +1,40 @@
+name: Deploy WebApp
+on: [push, workflow_dispatch]
+
+env:
+  IMAGE_NAME: flask-demo
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the repo
+      - name: "Checkout Github Action"
+        uses: actions/checkout@main
+
+      - name: "Login via Azure CLI"
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS}}
+
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{vars.DOCKER_REGISTRY_SERVER_URL}}
+          username: ${{ secrets.DOCKER_REGISTRY_SERVER_USERNAME }}
+          password: ${{ secrets.DOCKER_REGISTRY_SERVER_PASSWORD }}
+
+      - name: Set image version
+        id: image-version
+        run: echo "::set-output name=version::$(date +'%Y.%m.%d.%H.%M')"
+
+      - name: "Build and push image"
+        run: |
+          docker build . -t ${{ vars.DOCKER_REGISTRY_SERVER_URL }}/${{env.IMAGE_NAME}}:${{ steps.image-version.outputs.version }}
+          docker build . -t ${{ vars.DOCKER_REGISTRY_SERVER_URL }}/${{env.IMAGE_NAME}}:latest
+          docker push ${{ vars.DOCKER_REGISTRY_SERVER_URL }}/${{env.IMAGE_NAME}}:${{ steps.image-version.outputs.version }}
+          docker push ${{ vars.DOCKER_REGISTRY_SERVER_URL }}/${{env.IMAGE_NAME}}:latest
+
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ vars.WEB_APP_NAME }}
+          images: "${{vars.DOCKER_REGISTRY_SERVER_URL}}/${{env.IMAGE_NAME}}:latest"
