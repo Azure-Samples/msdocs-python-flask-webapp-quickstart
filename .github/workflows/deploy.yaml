@@ -6,11 +6,11 @@ env:
   KEY_VAULT_SECRET_NAME_ACR_USERNAME: "acr-username"
   KEY_VAULT_SECRET_NAME_ACR_PASSWORD: "acr-password1"
   KEY_VAULT_NAME: "lucac-keyvault1"
-  REGISTRY_LOGIN_SERVER: "lucac.azurecr.io"
+  REGISTRY_LOGIN_SERVER: "luca1.azurecr.io"
   WEB_APP_NAME: "lucac-webapp"
-  REGISTRY_USERNAME: "lucac"
-  REGISTRY_PASSWORD: "ZtS+xxL1j1p/uSR9cweyo23IQyVlNrjJX+oKbExXlt+ACRDUDypi"
-  DOCKER_REGISTRY_SERVER_URL: "lucac.azurecr.io"
+  REGISTRY_USERNAME: "luca1"
+  REGISTRY_PASSWORD: "U9Uzl5vCICDBpZWcBIVEXlBKOwmLqErcqGSzsOAGkf+ACRB/emyh"
+  DOCKER_REGISTRY_SERVER_URL: "luca1.azurecr.io"
 
 jobs:
   build-and-deploy:
