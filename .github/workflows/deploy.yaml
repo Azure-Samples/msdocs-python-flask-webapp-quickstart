@@ -5,12 +5,12 @@ env:
   IMAGE_NAME: flask-demo
   KEY_VAULT_SECRET_NAME_ACR_USERNAME: "acr-username"
   KEY_VAULT_SECRET_NAME_ACR_PASSWORD: "acr-password1"
-  KEY_VAULT_NAME: "lucac-keyvault1"
-  REGISTRY_LOGIN_SERVER: "luca1.azurecr.io"
-  WEB_APP_NAME: "lucac-webapp"
-  REGISTRY_USERNAME: "luca1"
-  REGISTRY_PASSWORD: "U9Uzl5vCICDBpZWcBIVEXlBKOwmLqErcqGSzsOAGkf+ACRB/emyh"
-  DOCKER_REGISTRY_SERVER_URL: "luca1.azurecr.io"
+  KEY_VAULT_NAME: "lucacb1-keyvault1"
+  REGISTRY_LOGIN_SERVER: "lucacb1.azurecr.io"
+  WEB_APP_NAME: "lucacb1-webapp"
+  REGISTRY_USERNAME: "lucacb1"
+  REGISTRY_PASSWORD: "RBpz48JHIf0mR6WhygjrRcpGNRTLWNUUcG21SW6DB2+ACRDF3D6j"
+  DOCKER_REGISTRY_SERVER_URL: "lucacb1.azurecr.io"
 
 jobs:
   build-and-deploy:
