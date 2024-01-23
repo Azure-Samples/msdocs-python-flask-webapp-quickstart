@@ -14,7 +14,12 @@
           </div>
         <form method="post" action="{{url_for('hello')}}">
             <div class="col-md-6 mx-auto text-center">
-                <label for="name" class="form-label fw-bold fs-5">Could you please tell me your name?</label>
+                <label for="name" class="form-label fw-bold fs-5">キット発送形態</label>
+                <select name="キット発送形態">
+                    <option value="aka">自宅宛</option>
+                    <option value="ao">複合機連携</option>
+                    <option value="kiiro">事業所一括</option>
+                </select>
 
                 <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
