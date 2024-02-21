@@ -1,5 +1,5 @@
 import os
-
+import pandas as pd
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 
@@ -19,6 +19,11 @@ def favicon():
 @app.route('/hello', methods=['POST'])
 def hello():
    name = request.form.get('name')
+   order = request.form.get('value')
+   data = {'Country': [name], 'Orders': [order]
+           }
+   df = pd.DataFrame(data)
+   df.to_csv('push.csv', mode='a', index=False, header=False)
 
    if name:
        print('Request for hello page received with name=%s' % name)
