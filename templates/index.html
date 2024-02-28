@@ -10,7 +10,7 @@
 <html>
    <body>
      <main>
-         <form method="post" action="{{url_for('hello')}}">
+
 
 
          <div class="rounded">
@@ -61,7 +61,7 @@
                         <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
                         <h1 class="display-6 fw-bold text-primary">Welcome</h1>
                       </div>
-                    <form >
+                    <form method="post" action="{{url_for('hello')}}">
                         <div class="col-md-6 mx-auto text-center">
                             <label for="name" class="form-label fw-bold fs-5">Country Name</label>
                             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
@@ -78,7 +78,7 @@
                     </form>
 
          <div>
-         </form>
+
      </main>      
    </body>
 </html>
