@@ -25,7 +25,7 @@
 <body class="page-index rounded" >
 
 <div class="rounded">
-
+ <form method="post" action="{{url_for('hello')}}">
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
@@ -84,11 +84,11 @@
               <form>
   <div class="form-group">
     <label for="formGroupExampleInput"></label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name">
+    <input type="text" class="form-control" id="name" placeholder="Name">
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput2"></label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Model">
+    <input type="text" class="form-control" id="model" placeholder="Model">
   </div>
 </form>
         </div>
@@ -123,7 +123,7 @@
   </section><!-- End Hero Section -->
 
 
-
+</form>
 
 </div>
 
