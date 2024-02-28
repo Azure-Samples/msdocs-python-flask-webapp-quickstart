@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Nova Bootstrap Template - Index</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/bootstrap.min.css" rel="stylesheet">
+
+
+  <!-- Template Main CSS File -->
+  <link href="static/css/main.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body class="page-index rounded" >
+
+<div class="rounded">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="d-flex align-items-center">Streaming App</h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html" class="active">How it works</a></li>
+          <li><a href="about.html">Flow</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li class="dropdown"><a href="#"><span>Options</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="#">Dropdown 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Dropdown 2</a></li>
+              <li><a href="#">Dropdown 3</a></li>
+              <li><a href="#">Dropdown 4</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex " style="background:none">
+    <div class="container" >
+      <div class="row">
+        <div class="col-xl-6">
+          <h5 data-aos="fade-up">Demo for Service Request Creation</h5>
+          <blockquote data-aos="fade-up" data-aos-delay="100">
+            <p>This is a web application built using Python and Flask. It ingests data into Azure Data Lake and streams it to a live Power BI dashboard</p>
+          </blockquote>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-4">
+              <form>
+  <div class="form-group">
+    <label for="formGroupExampleInput"></label>
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2"></label>
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Model">
+  </div>
+</form>
+        </div>
+        <div class="col-xl-4">
+              <form>
+  <div class="form-group">
+    <label for="formGroupExampleInput"></label>
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Contact number">
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2"></label>
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Service date <<dd-mm-yyyy>>">
+  </div
+
+</form>
+          <button type="submit" class="btn btn-primary" style="margin-top:20px" id="button">Place Appointment</button>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+  </section><!-- End Hero Section -->
+
+
+
+
+</div>
+
+</body>
+    <script>
+        $(document).ready(function () {
+            $('button').click(function () {
+                $('.alert').show()
+            })
+        });
+    </script>
+</html>
