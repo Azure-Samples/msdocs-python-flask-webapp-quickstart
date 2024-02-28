@@ -18,7 +18,7 @@ def index():
 @app.route('/hello', methods=['POST'])
 def hello():
    name = request.form.get('name')
-   order = request.form.get('value')
+   order = request.form.get('model')
    data = {'Country': [name], 'Orders': [order]
            }
    df = pd.DataFrame(data)
