@@ -5,7 +5,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta content="" name="description">
     <meta content="" name="keywords">
-    <title>Hello Azure - Python Quickstart</title>
+    <title>JA-Demo APP</title>
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">-->
           <!-- Vendor CSS Files -->
@@ -57,36 +57,33 @@
          </header><!-- End Header -->
 
          <section id="hero" class="hero d-flex " style="background:none">
-    <div class="container" >
-      <div class="row">
-        <div class="col-xl-6">
-          <h5 data-aos="fade-up">Demo for Service Request Creation</h5>
-          <blockquote data-aos="fade-up" data-aos-delay="100">
-            <p>This is a web application built using Python and Flask. It ingests data into Azure Data Lake and streams it to a live Power BI dashboard</p>
-          </blockquote>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xl-4">
-                    <form method="post" action="{{url_for('hello')}}">
-                        <div class="col-md-6 mx-auto text-center">
-                            <label for="name" class="form-label fw-bold fs-5">Country Name</label>
-                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-                                <input type="text" class="form-control" id="name" name="name" style="max-width: 256px;">
-                            </div>
-                            <label for="name" class="form-label fw-bold fs-5">Orders</label>
-                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-                                <input type="text" class="form-control" id="value" name="value" style="max-width: 256px;">
-                            </div>
-                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
-                              <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Say Hello</button>
-                            </div>
-                        </div>
-                    </form>
-        </div>
+                <div class="container" >
+                  <div class="row">
+                    <div class="col-xl-6">
+                      <h5 data-aos="fade-up">Demo for Service Request Creation</h5>
+                      <blockquote data-aos="fade-up" data-aos-delay="100">
+                        <p>This is a web application built using Python and Flask. It ingests data into Azure Data Lake and streams it to a live Power BI dashboard</p>
+                      </blockquote>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-4">
+                                <form method="post" action="{{url_for('hello')}}">
+                                         <div class="form-group">
+                                            <label for="formGroupExampleInput"></label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="formGroupExampleInput2"></label>
+                                            <input type="text" class="form-control" id="model" name="value" placeholder="Model">
+                                          </div>
+           
+                                </form>
+                                <button type="submit" class="btn btn-primary" style="margin-top:20px" id="button">Place Appointment</button>
+                    </div>
 
-    </div>
-    </div>
+                </div>
+                </div>
 </section>
      </div>
    </body>
