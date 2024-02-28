@@ -494,7 +494,7 @@ section {
 .hero {
   width: 100%;
   min-height: 100vh;
-  background: url("../img/hero-bg.jpg") top center;
+  
   background-size: cover;
   position: relative;
   padding: 100px 0;
@@ -521,7 +521,7 @@ section {
 
 @media (max-width: 1034px) {
   .hero:before {
-    background: rgba(27, 47, 69, 0.7);
+    background: #a0a7b0;
   }
 }
 
