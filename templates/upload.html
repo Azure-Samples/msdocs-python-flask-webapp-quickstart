@@ -5,7 +5,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta content="" name="description">
     <meta content="" name="keywords">
-    <title>JA-Demo</title>
+    <title>JA-Demo APP</title>
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">-->
           <!-- Vendor CSS Files -->
@@ -29,9 +29,9 @@
 
                            <nav id="navbar" class="navbar">
                             <ul>
-                              <li><a href="#" class="active">Streaming</a></li>
-                              <li><a href="#">Datalake upload</a></li>
-                              <li><a href="#">Report</a></li>
+                              <li><a href="/">Streaming</a></li>
+                              <li><a href="#" class="active">Datalake upload</a></li>
+                              <li><a href="{{url_for('report')}}">Report</a></li>
                               <li class="dropdown"><a href="#"><span>Options</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                                 <ul>
                                   <li><a href="#">Dropdown 1</a></li>
