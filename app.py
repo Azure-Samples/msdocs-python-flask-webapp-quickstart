@@ -53,6 +53,13 @@ def hello():
        print('Request for hello page received with no name or blank name -- redirecting')
        return redirect(url_for('index'))
 
+@app.route("/upload", methods=["GET", "POST"])
+def upload():
+    return render_template('upload.html')
 
+
+@app.route("/report", methods=["GET", "POST"])
+def report():
+    return render_template('report.html')
 if __name__ == '__main__':
    app.run(host="127.0.0.1", port="12345")
