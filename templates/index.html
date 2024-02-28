@@ -7,26 +7,75 @@
 <html>
    <body>
      <main>
-        <div class="px-4 py-3 my-2 text-center">
-            <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/azure-icon.svg') }}" alt="Azure Logo" width="192" height="192"/>
-            <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-            <h1 class="display-6 fw-bold text-primary">Welcome</h1>
-          </div>
-        <form method="post" action="{{url_for('hello')}}">
-            <div class="col-md-6 mx-auto text-center">
-                <label for="name" class="form-label fw-bold fs-5">Country Name</label>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-                    <input type="text" class="form-control" id="name" name="name" style="max-width: 256px;">
-                </div>
-                <label for="name" class="form-label fw-bold fs-5">Orders</label>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-                    <input type="text" class="form-control" id="value" name="value" style="max-width: 256px;">
-                </div>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
-                  <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Say Hello</button>
-                </div>            
+         <form method="post" action="{{url_for('hello')}}">
+
+
+         <div class="rounded">
+         <header id="header" class="header d-flex align-items-center fixed-top">
+           <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+                          <a href="index.html" class="logo d-flex align-items-center">
+                            <!-- Uncomment the line below if you also wish to use an image logo -->
+                            <!-- <img src="assets/img/logo.png" alt=""> -->
+                            <h1 class="d-flex align-items-center">Streaming App</h1>
+                          </a>
+
+                          <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+                          <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+                          <nav id="navbar" class="navbar">
+                            <ul>
+                              <li><a href="index.html" class="active">How it works</a></li>
+                              <li><a href="about.html">Flow</a></li>
+                              <li><a href="services.html">Services</a></li>
+                              <li class="dropdown"><a href="#"><span>Options</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                                <ul>
+                                  <li><a href="#">Dropdown 1</a></li>
+                                  <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                                    <ul>
+                                      <li><a href="#">Deep Dropdown 1</a></li>
+                                      <li><a href="#">Deep Dropdown 2</a></li>
+                                      <li><a href="#">Deep Dropdown 3</a></li>
+                                      <li><a href="#">Deep Dropdown 4</a></li>
+                                      <li><a href="#">Deep Dropdown 5</a></li>
+                                    </ul>
+                                  </li>
+                                  <li><a href="#">Dropdown 2</a></li>
+                                  <li><a href="#">Dropdown 3</a></li>
+                                  <li><a href="#">Dropdown 4</a></li>
+                                </ul>
+                              </li>
+                              <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                          </nav><!-- .navbar -->
+
             </div>
-        </form>
+         </header><!-- End Header -->
+
+
+                    <div class="px-4 py-3 my-2 text-center">
+                        <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/azure-icon.svg') }}" alt="Azure Logo" width="192" height="192"/>
+                        <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+                        <h1 class="display-6 fw-bold text-primary">Welcome</h1>
+                      </div>
+                    <form >
+                        <div class="col-md-6 mx-auto text-center">
+                            <label for="name" class="form-label fw-bold fs-5">Country Name</label>
+                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+                                <input type="text" class="form-control" id="name" name="name" style="max-width: 256px;">
+                            </div>
+                            <label for="name" class="form-label fw-bold fs-5">Orders</label>
+                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+                                <input type="text" class="form-control" id="value" name="value" style="max-width: 256px;">
+                            </div>
+                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
+                              <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Say Hello</button>
+                            </div>
+                        </div>
+                    </form>
+
+         <div>
+         </form>
      </main>      
    </body>
 </html>
