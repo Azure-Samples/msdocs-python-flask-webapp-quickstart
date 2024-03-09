@@ -38,6 +38,12 @@
 {% block bottom_part %}
     <div class="content" style="margin-top: 30px;">
         {% if serves|length >= 1 %}
+        <p>Total Serves: {{ serve_analysis.total_serves }}</p>
+        <p>Serves per week: {{ serve_analysis.average_serves_per_week }}</p>
+        <p>Practice per week: {{ serve_analysis.average_records_per_week }}</p>
+        <p>Total Duration: {{ serve_analysis.total_duration }}</p>
+        <p>Duration per week: {{ serve_analysis.average_duration_per_week }}</p>
+
         <script>
             function confirmDelete(serveId, u) {
                 var result = confirm("Are you sure you want to delete this entry?");

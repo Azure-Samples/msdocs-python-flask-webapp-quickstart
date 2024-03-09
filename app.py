@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect, send_file
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, timedelta
+from sqlalchemy import func, extract
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -37,6 +38,9 @@ class Serve(db.Model):
     def __repr__(self):
         return '<Serve %r>' % self.id
 
+class ServeAnalysis:
+    pass  # Empty class definition
+
 # Hardcoded dictionary mapping user IDs to names
 user_dict = {
     '1': 'Andrew',
@@ -63,9 +67,51 @@ def serve_index():
     uid = request.args.get('u')
 
     if request.method == 'GET':
-        serves = Serve.query.filter_by(player=uid).order_by(Serve.date.desc()).limit(3).all()
+        serves_all = Serve.query.filter_by(player=uid).order_by(Serve.date.desc()).all()
         current_date = datetime.now()
-        return render_template('serve.html', serves=serves, now=current_date)
+
+        # Calculate the start date of the current week (Monday)
+        today = datetime.now()
+        start_of_week = today - timedelta(days=today.weekday()) + timedelta(days=0 if today.weekday() == 6 else 1)
+
+        # Query to get total serves, total duration, and count of records for the player per week
+        results = Serve.query.with_entities(extract('year', Serve.date).label('year'),
+                                            extract('week', Serve.date).label('week'),
+                                            func.sum(Serve.total_serve),
+                                            func.sum(Serve.duration),
+                                            func.count(Serve.id)) \
+                            .filter(Serve.player == uid) \
+                            .group_by('year', 'week') \
+                            .all()
+
+        # Initialize variables
+        total_serves = 0
+        total_duration = 0
+        total_records = 0
+
+        # Iterate over the results and calculate totals
+        for _, _, serves, duration, records in results:
+            total_serves += serves or 0
+            total_duration += duration or 0
+            total_records += records or 0
+
+        # Calculate the number of weeks
+        num_weeks = len(results)
+
+        # Calculate averages
+        average_serves_per_week = total_serves / num_weeks if num_weeks > 0 else 0
+        average_duration_per_week = total_duration / num_weeks if num_weeks > 0 else 0
+        average_records_per_week = total_records / num_weeks if num_weeks > 0 else 0
+
+        # Create an instance of ServeAnalysis class
+        serve_analysis = ServeAnalysis()
+        serve_analysis.total_serves = total_serves
+        serve_analysis.total_duration = total_duration
+        serve_analysis.average_serves_per_week = average_serves_per_week
+        serve_analysis.average_duration_per_week = average_duration_per_week
+        serve_analysis.average_records_per_week = average_records_per_week
+
+        return render_template('serve.html', serves=serves_all, now=current_date, serve_analysis=serve_analysis)
     else:
         # Retrieve form data
         date = datetime.strptime(request.form['date'], '%Y-%m-%d')
@@ -152,8 +198,55 @@ def serve_update(id):
     else:
         return render_template('serve_update.html', serve=serve)
 
+@app.route('/serve/analysis')
+def serve_analysis():
+    player_id = request.args.get('u')
+    
+    # Calculate the start date of the current week (Monday)
+    today = datetime.now()
+    start_of_week = today - timedelta(days=today.weekday()) + timedelta(days=0 if today.weekday() == 6 else 1)
 
-# The TODO App entries
+    # Query to get total serves, total duration, and count of records for the player per week
+    results = Serve.query.with_entities(extract('year', Serve.date).label('year'),
+                                        extract('week', Serve.date).label('week'),
+                                        func.sum(Serve.total_serve),
+                                        func.sum(Serve.duration),
+                                        func.count(Serve.id)) \
+                        .filter(Serve.player == player_id) \
+                        .group_by('year', 'week') \
+                        .all()
+
+    # Initialize variables
+    total_serves = 0
+    total_duration = 0
+    total_records = 0
+
+    # Iterate over the results and calculate totals
+    for _, _, serves, duration, records in results:
+        total_serves += serves or 0
+        total_duration += duration or 0
+        total_records += records or 0
+
+    # Calculate the number of weeks
+    num_weeks = len(results)
+
+    # Calculate averages
+    average_serves_per_week = total_serves / num_weeks if num_weeks > 0 else 0
+    average_duration_per_week = total_duration / num_weeks if num_weeks > 0 else 0
+    average_records_per_week = total_records / num_weeks if num_weeks > 0 else 0
+
+    # Create an instance of ServeAnalysis class
+    serve_analysis = ServeAnalysis()
+    serve_analysis.total_serves = total_serves
+    serve_analysis.total_duration = total_duration
+    serve_analysis.average_serves_per_week = average_serves_per_week
+    serve_analysis.average_duration_per_week = average_duration_per_week
+    serve_analysis.average_records_per_week = average_records_per_week
+
+    # Pass the instance to the template
+    return render_template('serve_analysis.html', serve_analysis=serve_analysis)
+
+# The TODO App entries =====================================================================
 
 @app.route('/todo', methods=['POST', 'GET'])
 def todo_index():

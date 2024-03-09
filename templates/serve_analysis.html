@@ -1,0 +1,15 @@
+{% extends 'serve_base.html' %}
+
+{% block head %}
+<title>{{ user_name }}'s Serve Practice Analysis</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <p>Total Serves: {{ serve_analysis.total_serves }}</p>
+    <p>Serves per week: {{ serve_analysis.average_serves_per_week }}</p>
+    <p>Practice per week: {{ serve_analysis.average_records_per_week }}</p>
+    <p>Total Duration: {{ serve_analysis.total_duration }}</p>
+    <p>Duration per week: {{ serve_analysis.average_duration_per_week }}</p>
+</div>
+{% endblock %}
