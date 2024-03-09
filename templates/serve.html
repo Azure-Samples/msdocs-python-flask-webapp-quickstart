@@ -40,9 +40,11 @@
         {% if serves|length >= 1 %}
         <p>Total Serves: {{ serve_analysis.total_serves }}</p>
         <p>Serves per week: {{ serve_analysis.average_serves_per_week }}</p>
+        <p>Total Practice: {{ serve_analysis.total_records }}</p>
         <p>Practice per week: {{ serve_analysis.average_records_per_week }}</p>
-        <p>Total Duration: {{ serve_analysis.total_duration }}</p>
-        <p>Duration per week: {{ serve_analysis.average_duration_per_week }}</p>
+        <p>Total Duration (minutes): {{ serve_analysis.total_duration }}</p>
+        <p>Duration per week (minutes): {{ serve_analysis.average_duration_per_week }}</p>
+        <p>practiced: {{ serve_analysis.time_since_first_entry }}</p>
 
         <script>
             function confirmDelete(serveId, u) {

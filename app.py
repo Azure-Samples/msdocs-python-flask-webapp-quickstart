@@ -64,52 +64,69 @@ def index():
 
 @app.route('/serve', methods=['POST', 'GET'])
 def serve_index():
-    uid = request.args.get('u')
+    player_id = request.args.get('u')
 
     if request.method == 'GET':
-        serves_all = Serve.query.filter_by(player=uid).order_by(Serve.date.desc()).all()
+        serves_all = Serve.query.filter_by(player=player_id ).order_by(Serve.date.desc()).all()
         current_date = datetime.now()
 
-        # Calculate the start date of the current week (Monday)
-        today = datetime.now()
-        start_of_week = today - timedelta(days=today.weekday()) + timedelta(days=0 if today.weekday() == 6 else 1)
-
         # Query to get total serves, total duration, and count of records for the player per week
-        results = Serve.query.with_entities(extract('year', Serve.date).label('year'),
-                                            extract('week', Serve.date).label('week'),
-                                            func.sum(Serve.total_serve),
-                                            func.sum(Serve.duration),
-                                            func.count(Serve.id)) \
-                            .filter(Serve.player == uid) \
-                            .group_by('year', 'week') \
-                            .all()
+        weekly_results = Serve.query.with_entities(extract('year', Serve.date).label('year'),
+                                                extract('week', Serve.date).label('week'),
+                                                func.sum(Serve.total_serve),
+                                                func.sum(Serve.duration),
+                                                func.count(Serve.id)) \
+                                    .filter(Serve.player == player_id) \
+                                    .group_by('year', 'week') \
+                                    .all()
 
-        # Initialize variables
-        total_serves = 0
-        total_duration = 0
-        total_records = 0
+        # Initialize variables for weekly data
+        total_serves_weekly = 0
+        total_duration_weekly = 0
+        total_records_weekly = 0
 
-        # Iterate over the results and calculate totals
-        for _, _, serves, duration, records in results:
-            total_serves += serves or 0
-            total_duration += duration or 0
-            total_records += records or 0
+        # Iterate over the weekly results and calculate totals
+        for _, _, serves, duration, records in weekly_results:
+            total_serves_weekly += serves or 0
+            total_duration_weekly += duration or 0
+            total_records_weekly += records or 0
 
         # Calculate the number of weeks
-        num_weeks = len(results)
+        num_weeks = len(weekly_results)
 
-        # Calculate averages
-        average_serves_per_week = total_serves / num_weeks if num_weeks > 0 else 0
-        average_duration_per_week = total_duration / num_weeks if num_weeks > 0 else 0
-        average_records_per_week = total_records / num_weeks if num_weeks > 0 else 0
+        # Calculate averages for weekly data
+        average_serves_per_week = total_serves_weekly / num_weeks if num_weeks > 0 else 0
+        average_duration_per_week = total_duration_weekly / num_weeks if num_weeks > 0 else 0
+        average_records_per_week = total_records_weekly / num_weeks if num_weeks > 0 else 0
+
+        # Query to get total serves, total duration, and count of all records for the player
+        total_results = Serve.query.with_entities(func.sum(Serve.total_serve),
+                                                func.sum(Serve.duration),
+                                                func.count(Serve.id)) \
+                                    .filter(Serve.player == player_id) \
+                                    .first()
+
+        # Extract values from the total results
+        total_serves = total_results[0] or 0
+        total_duration = total_results[1] or 0
+        total_records = total_results[2] or 0
+
+        # Calculate the time since the first entry
+        first_entry = Serve.query.filter_by(player=player_id).order_by(Serve.date.asc()).first()
+        time_since_first_entry = datetime.now() - first_entry.date if first_entry else timedelta(0)
+
+        # Round up to days
+        time_since_first_entry_rounded = timedelta(days=time_since_first_entry.days)
 
         # Create an instance of ServeAnalysis class
         serve_analysis = ServeAnalysis()
         serve_analysis.total_serves = total_serves
         serve_analysis.total_duration = total_duration
+        serve_analysis.total_records = total_records
         serve_analysis.average_serves_per_week = average_serves_per_week
         serve_analysis.average_duration_per_week = average_duration_per_week
         serve_analysis.average_records_per_week = average_records_per_week
+        serve_analysis.time_since_first_entry = time_since_first_entry_rounded
 
         return render_template('serve.html', serves=serves_all, now=current_date, serve_analysis=serve_analysis)
     else:
