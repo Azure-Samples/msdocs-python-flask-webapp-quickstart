@@ -13,10 +13,86 @@ class Todo(db.Model):
 
     def __repr__(self):
         return '<Task %r>' % self.id
+    
+class Serve(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+    player = db.Column(db.Integer, nullable=False)
+    first_serve_in = db.Column(db.Integer, default=0)
+    first_serve_out = db.Column(db.Integer, default=0)
+    second_serve_in = db.Column(db.Integer, default=0)
+    second_serve_out = db.Column(db.Integer, default=0)
+    total_first_serve = db.Column(db.Integer, default=0)
+    total_second_serve = db.Column(db.Integer, default=0)
+    first_serve_in_percent = db.Column(db.Integer, default=0)
+    second_serve_in_percent = db.Column(db.Integer, default=0)
+    total_serve = db.Column(db.Integer, default=0)
+    total_serve_in = db.Column(db.Integer, default=0)
+    total_serve_out = db.Column(db.Integer, default=0)
+    total_serve_percent = db.Column(db.Integer, default=0)
+    duration = db.Column(db.Integer, default=0)
+    location = db.Column(db.String(200))
+    comment = db.Column(db.String(1000))
+
+    def __repr__(self):
+        return '<Serve %r>' % self.id
 
 @app.route('/')
 def index():
    return render_template('index.html')
+
+# The Serve app entries
+@app.route('/serve', methods=['POST', 'GET'])
+def serve_index():
+    if request.method == 'GET':
+        serves = Serve.query.order_by(Serve.date).all()
+        return render_template('serve.html', serves=serves)
+    else:
+        # Retrieve form data
+        date = datetime.strptime(request.form['date'], '%Y-%m-%d')
+        first_serve_in = request.form['first_serve_in']
+        first_serve_out = request.form['first_serve_out']
+        first_serve_in_percent = request.form['first_serve_in_percent']
+        second_serve_in = request.form['second_serve_in']
+        second_serve_out = request.form['second_serve_out']
+        second_serve_in_percent = request.form['second_serve_in_percent']
+        total_serve_in = request.form['total_serve_in']
+        total_serve_out = request.form['total_serve_out']
+        total_serve_percent = request.form['total_serve_percent']
+        total_serve = request.form['total_serve']
+        duration = request.form['duration']
+        location = request.form['location']
+        comment = request.form['comment']
+        player = 0
+
+        # Create an instance of Serve class
+        serve_instance = Serve(
+            date=date,
+            first_serve_in=first_serve_in,
+            first_serve_out=first_serve_out,
+            second_serve_in=second_serve_in,
+            second_serve_out=second_serve_out,
+            total_first_serve=first_serve_in + first_serve_out,
+            total_second_serve=second_serve_in + second_serve_out,
+            first_serve_in_percent=first_serve_in_percent,
+            second_serve_in_percent=second_serve_in_percent,
+            total_serve=total_serve,
+            total_serve_in=total_serve_in,
+            total_serve_out=total_serve_out,
+            total_serve_percent=total_serve_percent,
+            duration=duration,
+            location=location,
+            comment=comment,
+            player = player
+        )
+
+        # Add the instance to the database
+        db.session.add(serve_instance)
+        db.session.commit()
+        return redirect('/serve')
+
+
+# The TODO App entries
 
 @app.route('/todo', methods=['POST', 'GET'])
 def todo_index():
@@ -63,6 +139,8 @@ def todo_update(id):
     else:
         return render_template('todo_update.html', task=task)
 
+# The Serve practice App entries
 
 if __name__ == "__main__":
+    app.debug = True
     app.run(debug=True)

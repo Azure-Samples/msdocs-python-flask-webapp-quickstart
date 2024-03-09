@@ -1,0 +1,210 @@
+{% extends 'serve_base.html' %}
+
+{% block head %}
+<title>Emily's Serve Practice</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Emily's Serve Practice</h1>
+    {% if serves|length < 1 %}
+    <h4 style="text-align: center">You haven't practiced serves yet. Do it now!</h4>
+    {% else %}
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Serves</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+        {% for serve in serves %}
+            <tr>
+                <td>{{ serve.date.date() }}</td>
+                <td>{{ serve.total_serve }}</td>
+                <td>{{ serve.location }}</td>
+                <td>
+                    <a href="/serve/delete/{{serve.id}}">Delete</a>
+                    <br>
+                    <a href="/serve/update/{{serve.id}}">Update</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <div class="form">
+        <form action="/serve" method="POST">
+            <table>
+                <tr>
+                    <td>Date:</td>
+                    <td><input type="text" name="date" id="date"></td>
+                </tr>
+                <tr>
+                    <td>First Serve In:</td>
+                    <td><input type="text" name="first_serve_in" id="first_serve_in"></td>
+                </tr>
+                <tr>
+                    <td>First Serve Out:</td>
+                    <td><input type="text" name="first_serve_out" id="first_serve_out"></td>
+                </tr>
+                <tr>
+                    <td>First Serve Percentage:</td>
+                    <td class="serve-percent"><input type="text" name="first_serve_in_percent" id="first_serve_in_percent"><span>%</span></td>
+                </tr>
+                <tr>
+                    <td>Second Serve In:</td>
+                    <td><input type="text" name="second_serve_in" id="second_serve_in"></td>
+                </tr>
+                <tr>
+                    <td>Second Serve Out:</td>
+                    <td><input type="text" name="second_serve_out" id="second_serve_out"></td>
+                </tr>
+                <tr>
+                    <td>Second Serve Percentage:</td>
+                    <td class="serve-percent"><input type="text" name="second_serve_in_percent" id="second_serve_in_percent"><span>%</span></td>
+                </tr>
+                <tr>
+                    <td>Total Serve In:</td>
+                    <td><input type="text" name="total_serve_in" id="total_serve_in"></td>
+                </tr>
+                <tr>
+                    <td>Total Serve Out:</td>
+                    <td><input type="text" name="total_serve_out" id="total_serve_out"></td>
+                </tr>
+                <tr>
+                    <td>Total Serve Percentage:</td>
+                    <td class="serve-percent"><input type="text" name="total_serve_percent" id="total_serve_percent"><span>%</span></td>
+                </tr>
+                <tr>
+                    <td>Total Serve:</td>
+                    <td><input type="text" name="total_serve" id="total_serve"></td>
+                </tr>
+                <tr>
+                    <td>Duration:</td>
+                    <td><input type="text" name="duration" id="duration"></td>
+                </tr>
+                <tr>
+                    <td>Location:</td>
+                    <td><input type="text" name="location" id="location"></td>
+                </tr>
+                <tr>
+                    <td>Comment:</td>
+                    <td><input type="text" name="comment" id="comment"></td>
+                </tr>
+            </table>
+            <input type="submit" value="Add Entry">
+        </form>
+    </div>
+</div>
+
+<script>
+    // Get today's date
+    var today = new Date();
+    
+    // Format the date as YYYY-MM-DD
+    var formattedDate = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+    
+    // Set the value of the input field with today's date
+    document.getElementById('date').value = formattedDate;
+
+    // Function to calculate the first serve percentage
+    function calculateFirstServePercentage() {
+        var firstServeIn = parseFloat(document.getElementById('first_serve_in').value);
+        var firstServeOut = parseFloat(document.getElementById('first_serve_out').value);
+        
+        // Check if inputs are valid numbers
+        if (!isNaN(firstServeIn) && !isNaN(firstServeOut) && (firstServeIn + firstServeOut !== 0)) {
+            // Calculate the percentage and round it to the nearest integer
+            var percentage = Math.round((firstServeIn / (firstServeIn + firstServeOut)) * 100);
+            // Update the span with the calculated percentage
+            document.getElementById('first_serve_in_percent').value = percentage;
+        } else {
+            // If inputs are not valid, display an empty percentage
+            document.getElementById('first_serve_in_percent').value = "";
+        }
+
+        calculateTotalServe();
+    }
+
+    // Add event listeners to the input fields
+    document.getElementById('first_serve_in').addEventListener('input', calculateFirstServePercentage);
+    document.getElementById('first_serve_out').addEventListener('input', calculateFirstServePercentage);
+
+    // Initial calculation when the page loads
+    calculateFirstServePercentage();
+
+    function calculateSecondServePercentage() {
+        var secondServeIn = parseFloat(document.getElementById('second_serve_in').value);
+        var secondServeOut = parseFloat(document.getElementById('second_serve_out').value);
+        
+        // Check if inputs are valid numbers
+        if (!isNaN(secondServeIn) && !isNaN(secondServeOut) && (secondServeIn + secondServeOut !== 0)) {
+            // Calculate the percentage and round it to the nearest integer
+            var percentage = Math.round((secondServeIn / (secondServeIn + secondServeOut)) * 100);
+            // Update the span with the calculated percentage
+            document.getElementById('second_serve_in_percent').value = percentage;
+        } else {
+            // If inputs are not valid, display an empty percentage
+            document.getElementById('second_serve_in_percent').value = "";
+        }
+
+        calculateTotalServe();
+    }
+
+    // Add event listeners to the input fields
+    document.getElementById('second_serve_in').addEventListener('input', calculateSecondServePercentage);
+    document.getElementById('second_serve_out').addEventListener('input', calculateSecondServePercentage);
+
+    // Initial calculation when the page loads
+    calculateSecondServePercentage();
+
+    // Function to calculate total serve statistics
+    function calculateTotalServe() {
+        var firstServeIn = parseFloat(document.getElementById('first_serve_in').value);
+        var firstServeOut = parseFloat(document.getElementById('first_serve_out').value);
+        var secondServeIn = parseFloat(document.getElementById('second_serve_in').value);
+        var secondServeOut = parseFloat(document.getElementById('second_serve_out').value);
+        
+        var totalServeInValue = parseFloat(document.getElementById('total_serve_in').value);
+        var totalServeOutValue = parseFloat(document.getElementById('total_serve_out').value);
+
+        // Calculate total serve in and update the input field
+        var totalServeIn = (isNaN(firstServeIn) ? 0 : firstServeIn) + (isNaN(secondServeIn) ? 0 : secondServeIn);
+        if (totalServeIn > 0) {
+            document.getElementById('total_serve_in').value = totalServeIn;
+        } else {
+            totalServeIn = totalServeInValue;
+        }
+        
+        // Calculate total serve out and update the input field
+        var totalServeOut = (isNaN(firstServeOut) ? 0 : firstServeOut) + (isNaN(secondServeOut) ? 0 : secondServeOut);
+        if (totalServeOut > 0) {
+            document.getElementById('total_serve_out').value = totalServeOut;
+        } else {
+            totalServeOut = totalServeOutValue;
+        }
+        
+        // Calculate total serve
+        var totalServe = totalServeIn + totalServeOut;
+        if (totalServe > 0) {
+            document.getElementById('total_serve').value = totalServe;
+        }
+
+        // Check if inputs are valid numbers
+        if (!isNaN(totalServeIn) && !isNaN(totalServeOut) && (totalServeIn + totalServeOut !== 0)) {
+            // Calculate the percentage and round it to the nearest integer
+            var percentage = Math.round((totalServeIn / (totalServeIn + totalServeOut)) * 100);
+            // Update the span with the calculated percentage
+            document.getElementById('total_serve_percent').value = percentage;
+        } else {
+            // If inputs are not valid, display an empty percentage
+            document.getElementById('total_serve_percent').value = "";
+        }
+    }
+
+    // Add event listeners to the input fields
+    document.getElementById('total_serve_in').addEventListener('input', calculateTotalServe);
+    document.getElementById('total_serve_out').addEventListener('input', calculateTotalServe);
+</script>
+
+{% endblock %}
