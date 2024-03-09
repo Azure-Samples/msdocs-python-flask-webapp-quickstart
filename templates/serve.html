@@ -5,8 +5,8 @@
     <h4 style="text-align: center">You haven't practiced serves yet. Do it now!</h4>
     {% else %}
     {% set days_since_last_serve = (now.date() - serves[0].date.date()).days %}
-    <h4 style="text-align: center">You haven't practiced serve for {{ days_since_last_serve }} days.</h4>
-    <div style="text-align: center; color: {% if days_since_last_serve < 3 %}green{% elif days_since_last_serve < 6 %}black{% else %}red{% endif %};">
+    <h4 style="text-align: center; color: {% if days_since_last_serve < 3 %}green{% elif days_since_last_serve < 6 %}black{% else %}red{% endif %};">
+        <p>It has been {{ days_since_last_serve }} days since last practice.</p>
         {% if days_since_last_serve < 3 %}
         <p>Good job! You have worked hard!</p>
         {% elif days_since_last_serve < 6 %}
@@ -14,34 +14,7 @@
         {% else %}
         <p>It has been a week you haven't practiced serves, do it now!</p>
         {% endif %}
-    </div>
-    <script>
-        function confirmDelete(serveId, u) {
-            var result = confirm("Are you sure you want to delete this entry?");
-            if (result) {
-                window.location.href = "/serve/delete/" + serveId + "?u=" + u;
-            }
-        }
-    </script>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Serves</th>
-            <th>Location</th>
-            <th>Actions</th>
-        </tr>
-        {% for serve in serves %}
-            <tr>
-                <td>{{ serve.date.date() }}</td>
-                <td>{{ serve.total_serve }}</td>
-                <td>{{ serve.location }}</td>
-                <td>
-                    <a href="/serve/update/{{serve.id}}?u={{ u }}" style="margin-left: 10px; margin-right: 20px;">U</a>
-                    <a href="#" onclick="confirmDelete('{{ serve.id }}', '{{ u }}')">D</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    </h4>
     {% endif %}
 {% endblock %}
 
@@ -61,3 +34,41 @@
 {% block form_duration %}{% endblock %}
 {% block form_location %}{% endblock %}
 {% block form_comment %}{% endblock %}
+
+{% block bottom_part %}
+    <div class="content" style="margin-top: 30px;">
+        {% if serves|length >= 1 %}
+        <script>
+            function confirmDelete(serveId, u) {
+                var result = confirm("Are you sure you want to delete this entry?");
+                if (result) {
+                    window.location.href = "/serve/delete/" + serveId + "?u=" + u;
+                }
+            }
+        </script>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Serves</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+            {% for serve in serves %}
+                <tr>
+                    <td>{{ serve.date.date() }}</td>
+                    <td>{{ serve.total_serve }}</td>
+                    <td>{{ serve.location }}</td>
+                    <td>
+                        <a href="/serve/update/{{serve.id}}?u={{ u }}" style="margin-left: 10px; margin-right: 20px;">U</a>
+                        <a href="#" onclick="confirmDelete('{{ serve.id }}', '{{ u }}')">D</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div style="margin-left: 10px; margin-top: 20px;">
+            <a href="/serve/analysis?u={{ u }}">Analysis</a>
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
