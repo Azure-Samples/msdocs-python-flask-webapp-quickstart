@@ -108,6 +108,18 @@ def serve_index():
         db.session.add(serve_instance)
         db.session.commit()
         return redirect('/serve?u=' + uid)
+    
+@app.route('/serve/delete/<int:id>')
+def serve_delete(id):
+    serve_to_delete = Serve.query.get_or_404(id)
+    uid = request.args.get('u')
+
+    try:
+        db.session.delete(serve_to_delete)
+        db.session.commit()
+        return redirect('/serve?u=' + uid)
+    except:
+        return 'There was a problem deleting that task'
 
 
 # The TODO App entries
