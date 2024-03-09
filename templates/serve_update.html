@@ -1,0 +1,23 @@
+{% extends 'serve_form_base.html' %}
+
+{% block first_part %}
+
+<p>ID: {{ serve.id }}</p>
+    
+{% endblock %}
+
+{% block form_action %}/serve/update/{{serve.id}}{% endblock %}
+{% block form_date %}{{serve.date}}{% endblock %}
+{% block form_first_serve_in %}{{serve.first_serve_in}}{% endblock %}
+{% block form_first_serve_out %}{{serve.first_serve_out}}{% endblock %}
+{% block form_first_serve_in_percent %}{{serve.first_serve_in_percent}}{% endblock %}
+{% block form_second_serve_in %}{{serve.second_serve_in}}{% endblock %}
+{% block form_second_serve_out %}{{serve.second_serve_out}}{% endblock %}
+{% block form_second_serve_in_percent %}{{serve.second_serve_in_percent}}{% endblock %}
+{% block form_total_serve_in %}{{serve.total_serve_in}}{% endblock %}
+{% block form_total_serve_out %}{{serve.total_serve_out}}{% endblock %}
+{% block form_total_serve_percent %}{{serve.locform_total_serve_percentation}}{% endblock %}
+{% block form_total_serve %}{{serve.total_serve}}{% endblock %}
+{% block form_duration %}{{serve.duration}}{% endblock %}
+{% block form_location %}{{serve.location}}{% endblock %}
+{% block form_comment %}{{serve.comment}}{% endblock %}

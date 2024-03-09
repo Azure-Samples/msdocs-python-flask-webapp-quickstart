@@ -121,6 +121,36 @@ def serve_delete(id):
     except:
         return 'There was a problem deleting that task'
 
+@app.route('/serve/update/<int:id>', methods=['GET', 'POST'])
+def serve_update(id):
+    serve = Serve.query.get_or_404(id)
+    uid = request.args.get('u')
+
+    if request.method == 'POST':
+        serve.date = datetime.strptime(request.form['date'], '%Y-%m-%d')
+        serve.first_serve_in = request.form['first_serve_in']
+        serve.first_serve_out = request.form['first_serve_out']
+        serve.first_serve_in_percent = request.form['first_serve_in_percent']
+        serve.second_serve_in = request.form['second_serve_in']
+        serve.second_serve_out = request.form['second_serve_out']
+        serve.second_serve_in_percent = request.form['second_serve_in_percent']
+        serve.total_serve_in = request.form['total_serve_in']
+        serve.total_serve_out = request.form['total_serve_out']
+        serve.total_serve_percent = request.form['total_serve_percent']
+        serve.total_serve = request.form['total_serve']
+        serve.duration = request.form['duration']
+        serve.location = request.form['location']
+        serve.comment = request.form['comment']
+
+        try:
+            db.session.commit()
+            return redirect('/serve?u=' + uid)
+        except:
+            return 'There was an issue updating your task'
+
+    else:
+        return render_template('serve_update.html', serve=serve)
+
 
 # The TODO App entries
 
