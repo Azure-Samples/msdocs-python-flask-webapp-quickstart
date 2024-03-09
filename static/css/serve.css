@@ -44,3 +44,8 @@ td {
     display: inline-block;
     white-space: nowrap; /* Prevent wrapping of the "%" sign */
 }
+
+.user_input {
+    font-weight: bold;
+    color: blue;
+}

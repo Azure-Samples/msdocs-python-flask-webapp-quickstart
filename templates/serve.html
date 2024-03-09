@@ -6,7 +6,7 @@
     {% else %}
     {% set days_since_last_serve = (now.date() - serves[0].date.date()).days %}
     <h4 style="text-align: center">You haven't practiced serve for {{ days_since_last_serve }} days.</h4>
-    <div style="color: {% if days_since_last_serve < 3 %}green{% elif days_since_last_serve < 6 %}black{% else %}red{% endif %};">
+    <div style="text-align: center; color: {% if days_since_last_serve < 3 %}green{% elif days_since_last_serve < 6 %}black{% else %}red{% endif %};">
         {% if days_since_last_serve < 3 %}
         <p>Good job! You have worked hard!</p>
         {% elif days_since_last_serve < 6 %}
@@ -15,6 +15,14 @@
         <p>It has been a week you haven't practiced serves, do it now!</p>
         {% endif %}
     </div>
+    <script>
+        function confirmDelete(serveId, u) {
+            var result = confirm("Are you sure you want to delete this entry?");
+            if (result) {
+                window.location.href = "/serve/delete/" + serveId + "?u=" + u;
+            }
+        }
+    </script>
     <table>
         <tr>
             <th>Date</th>
@@ -28,9 +36,8 @@
                 <td>{{ serve.total_serve }}</td>
                 <td>{{ serve.location }}</td>
                 <td>
-                    <a href="/serve/delete/{{serve.id}}?u={{ u }}">Delete</a>
-                    <br>
-                    <a href="/serve/update/{{serve.id}}?u={{ u }}">Update</a>
+                    <a href="/serve/update/{{serve.id}}?u={{ u }}" style="margin-left: 10px; margin-right: 20px;">U</a>
+                    <a href="#" onclick="confirmDelete('{{ serve.id }}', '{{ u }}')">D</a>
                 </td>
             </tr>
         {% endfor %}
