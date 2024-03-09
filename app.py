@@ -63,8 +63,9 @@ def serve_index():
     uid = request.args.get('u')
 
     if request.method == 'GET':
-        serves = Serve.query.filter_by(player=uid).order_by(Serve.date).all()
-        return render_template('serve.html', serves=serves)
+        serves = Serve.query.filter_by(player=uid).order_by(Serve.date.desc()).limit(3).all()
+        current_date = datetime.now()
+        return render_template('serve.html', serves=serves, now=current_date)
     else:
         # Retrieve form data
         date = datetime.strptime(request.form['date'], '%Y-%m-%d')

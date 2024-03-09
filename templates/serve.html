@@ -4,6 +4,17 @@
     {% if serves|length < 1 %}
     <h4 style="text-align: center">You haven't practiced serves yet. Do it now!</h4>
     {% else %}
+    {% set days_since_last_serve = (now.date() - serves[0].date.date()).days %}
+    <h4 style="text-align: center">You haven't practiced serve for {{ days_since_last_serve }} days.</h4>
+    <div style="color: {% if days_since_last_serve < 3 %}green{% elif days_since_last_serve < 6 %}black{% else %}red{% endif %};">
+        {% if days_since_last_serve < 3 %}
+        <p>Good job! You have worked hard!</p>
+        {% elif days_since_last_serve < 6 %}
+        <p>Be ready for the next practice</p>
+        {% else %}
+        <p>It has been a week you haven't practiced serves, do it now!</p>
+        {% endif %}
+    </div>
     <table>
         <tr>
             <th>Date</th>
