@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, send_file
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -37,15 +37,33 @@ class Serve(db.Model):
     def __repr__(self):
         return '<Serve %r>' % self.id
 
+# Hardcoded dictionary mapping user IDs to names
+user_dict = {
+    '1': 'Andrew',
+    '2': 'Emily',
+    '3': 'Alex'
+}
+
+# Define a context processor to include the "u" query string parameter and the corresponding user name
+@app.context_processor
+def inject_user():
+    user_id = request.args.get('u', '')  # Get the "u" query string parameter from the request
+    user_name = user_dict.get(user_id, '')  # Get the corresponding user name from the dictionary
+    return dict(u=user_id, user_name=user_name)  # Return a dictionary with the user parameter and user name
+
+
 @app.route('/')
 def index():
    return render_template('index.html')
 
 # The Serve app entries
+
 @app.route('/serve', methods=['POST', 'GET'])
 def serve_index():
+    uid = request.args.get('u')
+
     if request.method == 'GET':
-        serves = Serve.query.order_by(Serve.date).all()
+        serves = Serve.query.filter_by(player=uid).order_by(Serve.date).all()
         return render_template('serve.html', serves=serves)
     else:
         # Retrieve form data
@@ -63,7 +81,7 @@ def serve_index():
         duration = request.form['duration']
         location = request.form['location']
         comment = request.form['comment']
-        player = 0
+        player = uid
 
         # Create an instance of Serve class
         serve_instance = Serve(
@@ -89,7 +107,7 @@ def serve_index():
         # Add the instance to the database
         db.session.add(serve_instance)
         db.session.commit()
-        return redirect('/serve')
+        return redirect('/serve?u=' + uid)
 
 
 # The TODO App entries
@@ -138,6 +156,13 @@ def todo_update(id):
 
     else:
         return render_template('todo_update.html', task=task)
+    
+@app.route('/serve/db')
+def serve_db():
+    try:
+        return send_file('test.db', as_attachment=True)
+    except Exception as e:
+        return str(e)
 
 # The Serve practice App entries
 

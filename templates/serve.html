@@ -1,12 +1,12 @@
 {% extends 'serve_base.html' %}
 
 {% block head %}
-<title>Emily's Serve Practice</title>
+<title>{{ user_name }}'s Serve Practice</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
-    <h1 style="text-align: center">Emily's Serve Practice</h1>
+    <p>User ID: {{ u }}</p>
     {% if serves|length < 1 %}
     <h4 style="text-align: center">You haven't practiced serves yet. Do it now!</h4>
     {% else %}
@@ -23,9 +23,9 @@
                 <td>{{ serve.total_serve }}</td>
                 <td>{{ serve.location }}</td>
                 <td>
-                    <a href="/serve/delete/{{serve.id}}">Delete</a>
+                    <a href="/serve/delete/{{serve.id}}?u={{ u }}">Delete</a>
                     <br>
-                    <a href="/serve/update/{{serve.id}}">Update</a>
+                    <a href="/serve/delete/{{serve.id}}?u={{ u }}">Update</a>
                 </td>
             </tr>
         {% endfor %}
@@ -33,7 +33,7 @@
     {% endif %}
 
     <div class="form">
-        <form action="/serve" method="POST">
+        <form action="/serve?u={{ u }}" method="POST">
             <table>
                 <tr>
                     <td>Date:</td>
@@ -92,6 +92,7 @@
                     <td><input type="text" name="comment" id="comment"></td>
                 </tr>
             </table>
+            <br>
             <input type="submit" value="Add Entry">
         </form>
     </div>
