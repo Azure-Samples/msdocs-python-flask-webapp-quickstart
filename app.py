@@ -145,7 +145,7 @@ def serve_index():
         duration = request.form['duration']
         location = request.form['location']
         comment = request.form['comment']
-        player = uid
+        player = player_id
 
         # Create an instance of Serve class
         serve_instance = Serve(
@@ -171,7 +171,7 @@ def serve_index():
         # Add the instance to the database
         db.session.add(serve_instance)
         db.session.commit()
-        return redirect('/serve?u=' + uid)
+        return redirect('/serve?u=' + player_id)
     
 @app.route('/serve/delete/<int:id>')
 def serve_delete(id):
