@@ -85,7 +85,9 @@
     var formattedDate = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
     
     // Set the value of the input field with today's date
-    document.getElementById('date').value = formattedDate;
+    if (!document.getElementById('date').value) {
+        document.getElementById('date').value = formattedDate;
+    }
 
     // Function to calculate the first serve percentage
     function calculateFirstServePercentage() {

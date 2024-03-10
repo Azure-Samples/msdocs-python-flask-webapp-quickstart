@@ -263,6 +263,13 @@ def serve_analysis():
     # Pass the instance to the template
     return render_template('serve_analysis.html', serve_analysis=serve_analysis)
 
+@app.route('/serve/diagram')
+def serve_diagram():
+    player_id = request.args.get('u')
+    serves_all = Serve.query.filter_by(player=player_id).order_by(Serve.date.asc()).all()
+
+    return render_template('serve_diagram.html', serves=serves_all)
+
 # The TODO App entries =====================================================================
 
 @app.route('/todo', methods=['POST', 'GET'])

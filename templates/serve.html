@@ -39,12 +39,17 @@
     <div class="content" style="margin-top: 30px;">
         {% if serves|length >= 1 %}
         <p>Total Serves: {{ serve_analysis.total_serves }}</p>
-        <p>Serves per week: {{ serve_analysis.average_serves_per_week }}</p>
+        <p>Serves per week: {{ "{:.0f}".format(serve_analysis.average_serves_per_week) }}</p>
         <p>Total Practice: {{ serve_analysis.total_records }}</p>
-        <p>Practice per week: {{ serve_analysis.average_records_per_week }}</p>
+        <p>Practice per week: {{ "{:.1f}".format(serve_analysis.average_records_per_week) }}</p>
         <p>Total Duration (minutes): {{ serve_analysis.total_duration }}</p>
-        <p>Duration per week (minutes): {{ serve_analysis.average_duration_per_week }}</p>
-        <p>Started: {{ serve_analysis.time_since_first_entry }}</p>
+        <p>Duration per week (minutes): {{ "{:.0f}".format(serve_analysis.average_duration_per_week) }}</p>
+        <p>Started: {{ serve_analysis.time_since_first_entry.days }} days ago</p>
+
+        <div style="margin-left: 10px; margin-top: 20px; margin-bottom: 20px;">
+            <a href="/serve/diagram?u={{ u }}">Diagram</a>
+            <a href="/serve/analysis?u={{ u }}">Analysis</a>
+        </div>
 
         <script>
             function confirmDelete(serveId, u) {
@@ -58,6 +63,7 @@
             <tr>
                 <th>Date</th>
                 <th>Serves</th>
+                <th>%</th>
                 <th>Location</th>
                 <th>Actions</th>
             </tr>
@@ -65,6 +71,7 @@
                 <tr>
                     <td>{{ serve.date.date() }}</td>
                     <td>{{ serve.total_serve }}</td>
+                    <td>{{ serve.total_serve_percent }}</td>
                     <td>{{ serve.location }}</td>
                     <td>
                         <a href="/serve/update/{{serve.id}}?u={{ u }}" style="margin-left: 10px; margin-right: 20px;">U</a>
@@ -73,9 +80,6 @@
                 </tr>
             {% endfor %}
         </table>
-        <div style="margin-left: 10px; margin-top: 20px;">
-            <a href="/serve/analysis?u={{ u }}">Analysis</a>
-        </div>
         {% endif %}
     </div>
 

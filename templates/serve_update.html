@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block form_action %}/serve/update/{{serve.id}}{% endblock %}
-{% block form_date %}{{serve.date}}{% endblock %}
+{% block form_date %}{{serve.date.date()}}{% endblock %}
 {% block form_first_serve_in %}{{serve.first_serve_in}}{% endblock %}
 {% block form_first_serve_out %}{{serve.first_serve_out}}{% endblock %}
 {% block form_first_serve_in_percent %}{{serve.first_serve_in_percent}}{% endblock %}

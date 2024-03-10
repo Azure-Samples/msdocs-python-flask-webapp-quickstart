@@ -1,0 +1,55 @@
+{% extends 'serve_base.html' %}
+
+{% block head %}
+<title>{{ user_name }}'s Serve Practice Diagram</title>
+{% endblock %}
+
+{% block body %}
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<div class="content">
+    <h4 style="text-align: center;">Total Serve</h4>
+    <div id="chart"></div>
+    <h4 style="text-align: center;">Percentage</h4>
+    <div id="chart2"></div>
+</div>
+
+<script>
+var options = {
+  chart: {
+    type: 'bar'
+  },
+  series: [{
+    name: 'Total',
+    data: [{% for serve in serves %}{{ serve.total_serve }}{% if not loop.last %}, {% endif %}{% endfor %}]
+  }],
+  xaxis: {
+    categories: [{% for serve in serves %}"{{ serve.date.strftime('%Y-%m-%d') }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+  }
+}
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
+var options2 = {
+  chart: {
+    type: 'line'
+  },
+  series: [{
+    name: 'Total',
+    data: [{% for serve in serves %}{{ serve.total_serve_percent|default(0) }}{% if not loop.last %}, {% endif %}{% endfor %}]
+  },{
+    name: 'First',
+    data: [{% for serve in serves %}{{ serve.first_serve_in_percent|default(0) }}{% if not loop.last %}, {% endif %}{% endfor %}]
+  },{
+    name: 'Second',
+    data: [{% for serve in serves %}{{ serve.second_serve_in_percent|default(0) }}{% if not loop.last %}, {% endif %}{% endfor %}]
+  }],
+  xaxis: {
+    categories: [{% for serve in serves %}"{{ serve.date.strftime('%Y-%m-%d') }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+  }
+}
+var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+chart2.render();
+
+</script>
+{% endblock %}
