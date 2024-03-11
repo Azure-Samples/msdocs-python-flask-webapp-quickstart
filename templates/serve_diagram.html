@@ -12,6 +12,12 @@
     <div id="chart"></div>
     <h4 style="text-align: center;">Percentage</h4>
     <div id="chart2"></div>
+    <h4 style="text-align: center;">Weekly Serves</h4>
+    <div id="chart3"></div>
+    <h4 style="text-align: center;">Weekly Practice</h4>
+    <div id="chart4"></div>
+    <h4 style="text-align: center;">Weekly Duration</h4>
+    <div id="chart5"></div>
 </div>
 
 <script>
@@ -50,6 +56,51 @@ var options2 = {
 }
 var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
 chart2.render();
+
+var options3 = {
+  chart: {
+    type: 'bar'
+  },
+  series: [{
+    name: 'Weekly serve',
+    data: [{% for item in weekly_stats %}{{ item.total_serves }}{% if not loop.last %}, {% endif %}{% endfor %}]
+  }],
+  xaxis: {
+    categories: [{% for item in weekly_stats %}"{{ item.start_date.strftime('%Y-%m-%d') }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+  }
+}
+var chart3 = new ApexCharts(document.querySelector("#chart3"), options3);
+chart3.render();
+
+var options4 = {
+  chart: {
+    type: 'bar'
+  },
+  series: [{
+    name: 'Weekly serve',
+    data: [{% for item in weekly_stats %}{{ item.total_records }}{% if not loop.last %}, {% endif %}{% endfor %}]
+  }],
+  xaxis: {
+    categories: [{% for item in weekly_stats %}"{{ item.start_date.strftime('%Y-%m-%d') }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+  }
+}
+var chart4 = new ApexCharts(document.querySelector("#chart4"), options4);
+chart4.render();
+
+var options5 = {
+  chart: {
+    type: 'bar'
+  },
+  series: [{
+    name: 'Weekly serve',
+    data: [{% for item in weekly_stats %}{{ item.total_duration }}{% if not loop.last %}, {% endif %}{% endfor %}]
+  }],
+  xaxis: {
+    categories: [{% for item in weekly_stats %}"{{ item.start_date.strftime('%Y-%m-%d') }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+  }
+}
+var chart5 = new ApexCharts(document.querySelector("#chart5"), options5);
+chart5.render();
 
 </script>
 {% endblock %}

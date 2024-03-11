@@ -263,12 +263,71 @@ def serve_analysis():
     # Pass the instance to the template
     return render_template('serve_analysis.html', serve_analysis=serve_analysis)
 
+# Function to calculate the start and end of the week given a date
+def get_week_range(date):
+    start_of_week = date - timedelta(days=date.weekday())
+    end_of_week = start_of_week + timedelta(days=6)
+    return start_of_week, end_of_week
+
+
 @app.route('/serve/diagram')
 def serve_diagram():
     player_id = request.args.get('u')
     serves_all = Serve.query.filter_by(player=player_id).order_by(Serve.date.asc()).all()
 
-    return render_template('serve_diagram.html', serves=serves_all)
+    weekly_stats = []
+    
+    # Initialize statistics variables
+    total_serves_per_week = 0
+    total_records_per_week = 0
+    total_duration_per_week = 0
+
+    current_week_start, current_week_end = None, None
+
+    # Iterate through serves and calculate statistics
+    for serve in serves_all:
+        serve_date = serve.date
+        serve_duration = serve.duration
+        total_server = serve.total_serve
+
+        # current_week_start, current_week_end = get_week_range(serve_date)
+
+        # If the serve date is within the current week, update statistics
+        if current_week_start is None or serve_date < current_week_start or serve_date > current_week_end:
+            if current_week_start is not None:
+                # Append statistics for the current week
+                weekly_stats.append({
+                    'start_date': current_week_start,
+                    'end_date': current_week_end,
+                    'total_serves': total_serves_per_week,
+                    'total_records': total_records_per_week,
+                    'total_duration': total_duration_per_week
+                })
+
+            # Set the new week range
+            current_week_start, current_week_end = get_week_range(serve_date)
+
+            # Reset statistics for the new week
+            total_serves_per_week = 0
+            total_records_per_week = 0
+            total_duration_per_week = 0
+
+        # Update statistics if the serve falls into the current week
+        total_serves_per_week += total_server
+        total_records_per_week += 1
+        total_duration_per_week += serve_duration
+
+    # Append statistics for the last week
+    if current_week_start is not None:
+        weekly_stats.append({
+            'start_date': current_week_start,
+            'end_date': current_week_end,
+            'total_serves': total_serves_per_week,
+            'total_records': total_records_per_week,
+            'total_duration': total_duration_per_week
+        })
+
+    return render_template('serve_diagram.html', serves=serves_all, weekly_stats=weekly_stats)
 
 # The TODO App entries =====================================================================
 
