@@ -1,12 +1,15 @@
 # Local process
 
 1. py -m venv .venv
+   
 .venv\scripts\activate
 
 2. Install the dependencies:
+   
 pip install -r requirements.txt
 
 3. Run the app:
+   
 flask run
 
 
