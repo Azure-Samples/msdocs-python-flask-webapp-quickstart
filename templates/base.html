@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %} - Đại Tài WebApp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light p-2" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="{{ url_for('routes.index') }}">
+        <img src="{{ url_for('static', filename='favicon.ico') }}" width="30" height="30" alt="">
+    </a>
+    <a class="navbar-brand" href="{{ url_for('routes.index') }}">Đại Tài WebApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('employees.index') }}">Nhân viên</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('customers.index') }}">Khách hàng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('products.index') }}">Sản phẩm</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('invoices.index') }}">Hóa đơn</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="content container-fluid">
+    {% block content %} {% endblock %}
+</div>
+</body>
+</html>
