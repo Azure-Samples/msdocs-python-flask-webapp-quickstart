@@ -4,5 +4,27 @@
     <span class="title"><h1>{% block title %} Nhân viên {% endblock %}</h1></span>
     <div class="content">
         <h2>Quản lý nhân viên</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Mã nhân viên</th>
+                <th scope="col">Họ tên</th>
+                <th scope="col">Ngày bắt đầu</th>
+                <th scope="col">Ngày kết thúc</th>
+                <th scope="col">Lương</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <th scope="row">{{ employee.id }}</th>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.start_date }}</td>
+                    <td>{{ employee.end_date }}</td>
+                    <td>{{ employee.salary }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

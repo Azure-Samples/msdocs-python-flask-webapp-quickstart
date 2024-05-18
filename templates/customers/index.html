@@ -4,5 +4,27 @@
     <span class="title"><h1>{% block title %} Khách hàng {% endblock %}</h1></span>
     <div class="content">
         <h2>Quản lý khách hàng</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Mã khách hàng</th>
+                <th scope="col">Họ tên</th>
+                <th scope="col">Ngày sinh</th>
+                <th scope="col">Email</th>
+                <th scope="col">Địa chỉ</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <th scope="row">{{ customer.id }}</th>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.birth_date }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.address }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
