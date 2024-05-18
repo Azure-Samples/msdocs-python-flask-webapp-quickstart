@@ -1,15 +1,30 @@
 import os
-
+import pyodbc
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+### database connectioon
+server = 'azure-demo-server.database.windows.net'
+database = 'azure_demo_db'
+username = 'dainguyen'
+password = 'dainn@13062002'
+print("connecting.......")
+cnxn = pyodbc.connect(
+    'DRIVER={ODBC Driver 18 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
+cursor = cnxn.cursor()
+print("connected!")
 
 app = Flask(__name__)
 
 # Register blueprints here
 from routes import bp as main_bp
+
 app.register_blueprint(main_bp)
 
 from routes import bp_emp, bp_ctm, bp_prod, bp_inv
+
 app.register_blueprint(bp_emp, url_prefix='/employees')
 app.register_blueprint(bp_ctm, url_prefix='/customers')
 app.register_blueprint(bp_prod, url_prefix='/products')
