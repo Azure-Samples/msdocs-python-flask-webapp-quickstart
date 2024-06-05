@@ -1,0 +1,39 @@
+<!doctype html>
+<head>
+    <title>Assignment 1 - Sinong - cse6332</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<html>
+   <body>
+     <main>
+        <div class="container">
+            <h1>Assignment 1 for CSE 6332 - Sinong</h1>
+        </div>
+        <div class="container">
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              {% for header in titles%}
+                <th scope="col">{{header}}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in table_content %}
+              <tr>
+                {% for cell in row %}
+                    {% if cell is string and ".jpg" in cell %}
+                        <td><img src="../static/images/{{cell}}" class="img-thumbnail" style="width:200px" alt="Image"></td>
+                    {% else %}
+                        <td>{{cell}}</td>
+                    {% endif %}
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+     </main>      
+   </body>
+</html>

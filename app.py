@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
@@ -10,6 +11,16 @@ app = Flask(__name__)
 def index():
    print('Request for index page received')
    return render_template('index.html')
+
+@app.route('/assignment1')
+def assignment1():
+    data_file_path = os.path.join(app.root_path, 'static', 'data', 'people.csv')
+    data = pd.read_csv(data_file_path)
+    print('Request for assignment1 page received')
+    print(data)
+    print("----")
+    print(list(data.values.tolist()))
+    return render_template('assignment1.html', table_content=list(data.values.tolist()), titles=data.columns.values)
 
 @app.route('/favicon.ico')
 def favicon():
