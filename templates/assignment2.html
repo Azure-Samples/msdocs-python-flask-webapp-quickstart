@@ -1,0 +1,117 @@
+<!doctype html>
+<head>
+    <title>Assignment 2 - Sinong - cse6332</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+</head>
+<html>
+   <body>
+    <main>
+       <div class="container">
+        <h1 style="color: blue; font-size: 24px; text-align: center;">Assignment 1 for CSE 6332 - Sinong</h1>
+        
+        <!------------------------------------------>
+        <!-------------- upload module ------------->
+        <!------------------------------------------>
+        <!------------------------------------------>
+
+        <div class="mb-3" style="margin-top: 20px;">
+            <label for="formFile" class="form-label">Please upload your meta info file</label>
+            <form action="/a1-upload" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="formFile" name="file" style="border-radius: 0;">
+                    <button type="submit" class="btn btn-primary" style="border-radius: 0;">Upload</button>
+                </div>
+            </form>
+        </div>
+
+        <!------------------------------------------>
+        <!-------------- Search by name ------------>
+        <!------------------------------------------>
+        <!------------------------------------------>
+
+        <div class="mb-3" style="margin-top: 20px;">
+            <label for="formFile" class="form-label">Show basic info for(person):</label>
+            <form action="/a2-countbymag" method="post" enctype="multipart/form-data">
+            <div class="input-group">
+                    <input class="form-control" type="text" name="queryName" placeholder="Name (Case Sensetive)">
+                    <button type="submit" class="btn btn-primary" style="border-radius: 0;">Query</button>
+                </div>
+            </form>
+        </div>
+
+        <!------------------------------------------>
+        <!----------- Search by magnitude  --------->
+        <!------------------------------------------>
+        <!------------------------------------------>
+
+        <div class="mb-3" style="margin-top: 20px;">
+            <label for="formFile" class="form-label">Query earthquakes info by magnitude:</label>
+            <form action="/a2-searchbymag" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="minMag" placeholder="Min magnitude">
+                    <input class="form-control" type="text" name="maxMag" placeholder="Max magnitude">
+                    <input class="form-control" type="text" name="backDay" placeholder="How many days before?">
+                    <button type="submit" class="btn btn-primary" style="border-radius: 0;">Query</button>
+                </div>
+            </form>
+        </div>
+       </div>
+
+       <!------------------------------------------>
+        <!----------- Search by magnitude  --------->
+        <!------------------------------------------>
+        <!------------------------------------------>
+
+        <div class="mb-3" style="margin-top: 20px;">
+            <label for="formFile" class="form-label">Query earthquakes info by location:</label>
+            <form action="/a2-searchbymag" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="altitude" placeholder="Altitude">
+                    <input class="form-control" type="text" name="longitude" placeholder="Longitude">
+                    <input class="form-control" type="text" name="range" placeholder="Range unit:km">
+                    <button type="submit" class="btn btn-primary" style="border-radius: 0;">Query</button>
+                </div>
+            </form>
+        </div>
+        </div>
+
+       <div class="container"><nav class="navbar navbar-light bg-light justify-content-between">
+          <a class="navbar-brand">Retrival Result</a>
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </nav></div>
+
+       <div class="container">
+        {% if contain_content%}
+       <table class="table">
+        <thead class="thead-light">
+          <tr>
+            {% for header in titles%}
+                <th scope="col">{{header}}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in table_content %}
+            <tr>
+          {% for cell in row %}
+          {% if cell is string and ".jpg" in cell %}
+          <td><img src="../static/images/{{cell}}" class="img-thumbnail" style="width:200px" alt="Image"></td>
+          {% else %}
+          <td><span class="editable">{{cell}}</span></td>
+          {% endif %}
+          {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+       </table>
+       {% endif %}
+     </main>      
+   </body>
+</html>
