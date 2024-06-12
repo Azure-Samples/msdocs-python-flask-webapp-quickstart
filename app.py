@@ -1,10 +1,15 @@
 import os, uuid
 import pandas as pd
 
+<<<<<<< HEAD
 import pymssql
 from azure.identity import DefaultAzureCredential
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 import datetime
+=======
+from azure.identity import DefaultAzureCredential
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+>>>>>>> 819196df4b034b220112190ae0cd93812ce6c659
 
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for, session)
@@ -12,8 +17,11 @@ from flask import (Flask, redirect, render_template, request,
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
+<<<<<<< HEAD
 conn = pymssql.connect(host='sinong.database.windows.net' ,user='sinong' ,password = 'Wang1997h',database='cse6332')
 cur = conn.cursor()
+=======
+>>>>>>> 819196df4b034b220112190ae0cd93812ce6c659
 #================================================================================================
 # # Create a blob client using the local simulator
 # try:
@@ -36,6 +44,7 @@ def index():
    return render_template('index.html')
 
 
+<<<<<<< HEAD
 @app.route('/test')
 def test():
     SQL_QUERY = """
@@ -58,6 +67,8 @@ def test():
     return render_template('test.html', data=data)
 
 
+=======
+>>>>>>> 819196df4b034b220112190ae0cd93812ce6c659
 @app.route('/assignment1')
 def assignment1():
     data_file_path = os.path.join(app.root_path, 'static', 'data', 'people.csv')
@@ -67,6 +78,7 @@ def assignment1():
     return render_template('assignment1.html', contain_content=False, table_content=list(data.values.tolist()), titles=data.columns.values)
 
 
+<<<<<<< HEAD
 @app.route('/assignment2')
 def assignment2():
     
@@ -76,11 +88,14 @@ def assignment2():
     return render_template('assignment2.html', contain_content=False, table_content=data, titles=headers)
 
 
+=======
+>>>>>>> 819196df4b034b220112190ae0cd93812ce6c659
 @app.route('/a1-upload', methods = ['POST'])   
 def upload():   
     if request.method == 'POST':   
         f = request.files['file']
         file_path = os.path.join(app.root_path, 'uploads', f.filename)
+<<<<<<< HEAD
         session['file_path'] = file_path
         f.save(file_path)
 
@@ -99,12 +114,18 @@ def upload():
             cur.execute(sql_query)
 
         conn.commit()
+=======
+        f.save(file_path)
+        
+        data = pd.read_csv(file_path)
+>>>>>>> 819196df4b034b220112190ae0cd93812ce6c659
         return render_template('assignment1.html', contain_content=False, table_content=list(data.values.tolist()), titles=data.columns.values)
 
 
 @app.route('/a1-searchbyname', methods = ['POST', 'GET'])
 def a1_searchbyname():
     name = request.form.get('queryName')
+<<<<<<< HEAD
     data_file_path = session.get('file_path')
     data = pd.read_csv(data_file_path)
     query_data = data.loc[data['name'] == name]
@@ -160,6 +181,15 @@ def a2_searchbymag():
     return render_template('assignment2.html', contain_content=True, table_content=data, titles=headers)
 
 
+=======
+    data_file_path = os.path.join(app.root_path, 'static', 'data', 'people.csv')
+    data = pd.read_csv(data_file_path)
+    query_data = data.loc[data['Name'] == name]
+    print(name, query_data)
+    return render_template('assignment1.html', contain_content=True, table_content=list(query_data.values.tolist()), titles=query_data.columns.values)
+
+
+>>>>>>> 819196df4b034b220112190ae0cd93812ce6c659
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
