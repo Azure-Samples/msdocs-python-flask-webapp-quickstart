@@ -30,7 +30,7 @@ cur = conn.cursor()
 #     print("Error creating the BlobServiceClient object")
 #================================================================================================
 
-@app.route('/index')
+@app.route('/')
 def index():
    print('Request for index page received')
    return render_template('index.html')
@@ -67,7 +67,7 @@ def assignment1():
     return render_template('assignment1.html', contain_content=False, table_content=list(data.values.tolist()), titles=data.columns.values)
 
 
-@app.route('/')
+@app.route('/assignment2')
 def assignment2():
     
     print('Request for assignment1 page received')
