@@ -11,12 +11,12 @@ from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 
 from flask import request
-from config import *
+# from config import *
 
 app = Flask(__name__)
 
 
-'''
+
 endpoint = os.environ["AZURE_SEARCH_SERVICE_ENDPOINT"]
 credential = AzureKeyCredential(os.environ["AZURE_SEARCH_ADMIN_KEY"]) if len(os.environ["AZURE_SEARCH_ADMIN_KEY"]) > 0 else DefaultAzureCredential()
 # index_name = os.environ["AZURE_SEARCH_INDEX"]
@@ -30,8 +30,8 @@ azure_openai_embedding_deployment = os.environ["AZURE_OPENAI_EMBEDDING_DEPLOYMEN
 azure_openai_chatgpt_deployment = os.environ["AZURE_OPENAI_CHATGPT_DEPLOYMENT"]
 azure_openai_api_version = os.environ["AZURE_OPENAI_API_VERSION"]
 # embedding_dimensions = int(os.getenv("AZURE_OPENAI_EMBEDDING_DIMENSIONS", 1536))
-'''
 
+'''
 endpoint = AZURE_SEARCH_SERVICE_ENDPOINT
 credential = AzureKeyCredential(AZURE_SEARCH_ADMIN_KEY) if len(AZURE_SEARCH_ADMIN_KEY) > 0 else DefaultAzureCredential()
 azure_openai_endpoint = AZURE_OPENAI_ENDPOINT
@@ -40,6 +40,7 @@ azure_openai_embedding_model = AZURE_OPENAI_EMBEDDING_MODEL
 azure_openai_embedding_deployment = AZURE_OPENAI_EMBEDDING_DEPLOYMENT
 azure_openai_chatgpt_deployment = AZURE_OPENAI_CHATGPT_DEPLOYMENT
 azure_openai_api_version = AZURE_OPENAI_API_VERSION
+'''
 
 index = None
 
