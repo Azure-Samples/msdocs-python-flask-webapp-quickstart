@@ -11,9 +11,8 @@ from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 
 from flask import request
+import redis
 # from config import *
-
-app = Flask(__name__)
 
 
 
@@ -42,10 +41,7 @@ azure_openai_chatgpt_deployment = AZURE_OPENAI_CHATGPT_DEPLOYMENT
 azure_openai_api_version = AZURE_OPENAI_API_VERSION
 '''
 
-index = None
-
 def initialize_index():
-    global index
     from llama_index.embeddings.azure_openai import AzureOpenAIEmbedding
     embeddings = AzureOpenAIEmbedding(
         model_name=azure_openai_embedding_model,
@@ -117,10 +113,15 @@ def initialize_index():
         storage_context=storage_context,
     )
     print("Index Initialized")
+    return index
+    
+app = Flask(__name__)
+app.index = initialize_index()
+
     
 @app.route("/query", methods=["GET"])
 def query_index():
-    global index
+    index = app.index
     query_text = request.args.get("text", None)
     if query_text is None:
         return (
@@ -205,7 +206,6 @@ def hello():
 
 if __name__ == "__main__":
     # init the global index
-    print("initializing index...")
     initialize_index()
 
     app.run(host="0.0.0.0", port=5601)
