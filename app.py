@@ -11,7 +11,6 @@ from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 
 from flask import request
-import redis
 # from config import *
 
 
