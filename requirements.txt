@@ -1,5 +1,5 @@
-Flask==3.0.3
-gunicorn==22.0.0
+Flask
+gunicorn
 Werkzeug==2.2.2
 azure-search-documents==11.6.0b3
 azure-identity==1.17.1
