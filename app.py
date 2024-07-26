@@ -176,7 +176,7 @@ def query_index():
     )
     
     response = query_engine.query(query_text)
-    return str(response), 200
+    return str(response)
 
 @app.route('/')
 def index():
