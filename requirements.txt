@@ -6,6 +6,6 @@ azure-identity==1.17.1
 llama-index==0.10.58
 llama-index-vector-stores-azureaisearch==0.1.4
 llama-index-embeddings-azure-openai==0.1.7
-llama-index-readers-remote-depth==0.1.4
+llama-index-readers-remote-depth
 llama-index-readers-web==0.1.23
 llama-index-experimental==0.1.3
