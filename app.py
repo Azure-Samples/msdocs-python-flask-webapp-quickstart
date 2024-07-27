@@ -118,7 +118,7 @@ app = Flask(__name__)
 app.index = initialize_index()
 
     
-@app.route("/query", methods=["GET"])
+@app.route("/query", methods=["GET","POST"])
 def query_index():
     index = app.index
     query_text = request.args.get("text", None)
