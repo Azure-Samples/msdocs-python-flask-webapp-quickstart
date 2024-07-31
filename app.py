@@ -121,7 +121,8 @@ app.index = initialize_index()
 @app.route("/query", methods=["GET","POST"])
 def query_index():
     index = app.index
-    query_text = request.args.get("text", None)
+    # query_text = request.args.get("text", None)
+    query_text = request.values.get('Body', None)
     if query_text is None:
         return (
             "No text found, please include a ?text=blah parameter in the URL",
