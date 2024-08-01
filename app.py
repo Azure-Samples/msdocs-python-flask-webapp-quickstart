@@ -11,6 +11,7 @@ from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 
 from flask import request
+from twilio.twiml.messaging_response import MessagingResponse
 # from config import *
 
 
@@ -177,6 +178,10 @@ def query_index():
     )
     
     response = query_engine.query(query_text)
+    
+    # Start our TwiML response
+    resp = MessagingResponse()
+    response = resp.message(str(response))
     return str(response)
 
 @app.route('/')
