@@ -180,8 +180,11 @@ def query_index():
     
     # Start our TwiML response
     resp = MessagingResponse()
-    response_pass = resp.message(str(response))
-    return Response(str(response_pass), mimetype="application/xml")
+    # response_pass = resp.message(str(response))
+    response_pass = resp.message()
+    response_pass.body(str(response))
+    # return Response(str(response_pass), mimetype="application/xml")
+    return str(resp)
 
 @app.route('/')
 def index():
