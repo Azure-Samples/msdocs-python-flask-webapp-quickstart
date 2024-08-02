@@ -8,12 +8,11 @@ from llama_index.core import (
 )
 
 from flask import (Flask, redirect, render_template, request,
-                   send_from_directory, url_for)
+                   send_from_directory, url_for, Response)
 
 from flask import request
 from twilio.twiml.messaging_response import MessagingResponse
 # from config import *
-
 
 
 endpoint = os.environ["AZURE_SEARCH_SERVICE_ENDPOINT"]
@@ -181,8 +180,8 @@ def query_index():
     
     # Start our TwiML response
     resp = MessagingResponse()
-    response = resp.message(str(response))
-    return str(response)
+    response_pass = resp.message(str(response))
+    return Response(str(response_pass), mimetype="application/xml")
 
 @app.route('/')
 def index():
