@@ -29,6 +29,7 @@ azure_openai_chatgpt_deployment = os.environ["AZURE_OPENAI_CHATGPT_DEPLOYMENT"]
 azure_openai_api_version = os.environ["AZURE_OPENAI_API_VERSION"]
 # embedding_dimensions = int(os.getenv("AZURE_OPENAI_EMBEDDING_DIMENSIONS", 1536))
 
+
 '''
 endpoint = AZURE_SEARCH_SERVICE_ENDPOINT
 credential = AzureKeyCredential(AZURE_SEARCH_ADMIN_KEY) if len(AZURE_SEARCH_ADMIN_KEY) > 0 else DefaultAzureCredential()
@@ -151,7 +152,7 @@ def query_index():
     blog_tool = QueryEngineTool.from_defaults(
         query_engine=blog_query_engine,
         description=(
-            "Useful for summarization questions related to Prime Minister of India"
+            "Useful for summarization questions related to Prime Minister of India, president of USA and Jain Society of Houston (JSH) and Frequently Asked Questions (FAQs)"
         ),
     )
 
