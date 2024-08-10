@@ -61,7 +61,7 @@ def initialize_index():
     from azure.search.documents.indexes import SearchIndexClient
     from azure.search.documents import SearchClient
     # Index name to use
-    index_name = "llamaindex-vector-test-blog"
+    index_name = "llamaindex-vector-test-blog-jsh-demo"
 
     # Use index client to demonstrate creating an index
     index_client = SearchClient(
