@@ -60,3 +60,5 @@ jobs:
         app-name: ${{ env.WEBAPP_NAME }}
         images: |
           ${{ env.REGISTRY_LOGIN_SERVER }}/${{ env.IMAGE_BASE_NAME }}:${{ needs.build-and-push.outputs.image-version }}
+
+
