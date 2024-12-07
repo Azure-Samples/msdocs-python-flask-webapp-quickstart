@@ -16,8 +16,6 @@ param appServicePlanName string
 @description('Name of the Web App')
 param webAppName string
 
-var adminUsernameSecretName = 'adminPasswordSecretName0'
-var adminPasswordSecretName = 'adminPasswordSecretName1'
 
 module containerRegistryModule './modules/cr.bicep' = {
   name: containerRegistryName
