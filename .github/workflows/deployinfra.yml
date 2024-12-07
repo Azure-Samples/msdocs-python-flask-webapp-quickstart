@@ -1,0 +1,42 @@
+name: Deploy to Development
+
+on:
+    workflow_dispatch:
+    push:
+        branches:
+            - main
+
+env:
+  RESOURCE_GROUP_DEV: BCSAI2024-DEVOPS-STUDENTS-A-DEV
+  SUBSCRIPTION_ID_DEV: e0b9cada-61bc-4b5a-bd7a-52c606726b3b
+
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Bicep linter
+        run: az bicep build --file ./main.bicep 
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Development deployment'
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: deploy
+        uses: azure/arm-deploy@v2
+        with:
+          subscriptionId: ${{ env.SUBSCRIPTION_ID_DEV }}
+          resourceGroupName: ${{ env.RESOURCE_GROUP_DEV }}
+          template: ./main.bicep
+          parameters: >
+            ./parameters.bicepparam
+
+
