@@ -1,9 +1,9 @@
-param name string
+param containerRegistryName string
 param location string = resourceGroup().location
 
 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-01-01-preview' = {
-  name: name
+  name:  containerRegistryName
   location: location
   sku: {
     name: 'Basic'

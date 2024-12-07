@@ -8,3 +8,4 @@ param appServicePlanName = 'AnnaAppServicePlan'
 param webAppName = 'AnnaWebApp'
 
 
+

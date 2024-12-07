@@ -20,25 +20,25 @@ var adminUsernameSecretName = 'adminPasswordSecretName0'
 var adminPasswordSecretName = 'adminPasswordSecretName1'
 
 module containerRegistryModule './modules/cr.bicep' = {
-  name: 'containerRegistryDeployment'
+  name: containerRegistryName
   params: {
-    name: containerRegistryName
+    containerRegistryName: containerRegistryName
     location: location
   }
 }
 
 module appServicePlanModule './modules/cr.bicep' = {
-  name: 'appServicePlanDeployment'
+  name: appServicePlanName
   params: {
-    name: appServicePlanName
     location: location
+    containerRegistryName: containerRegistryName
   }
 }
 
 module webAppModule './modules/web.bicep' = {
-  name: 'webAppDeployment'
+  name: webAppName
   params: {
-    name: webAppName
+    webAppName: webAppName
     location: location
     appServicePlanId: appServicePlanModule.outputs.id
     dockerRegistryName: containerRegistryName

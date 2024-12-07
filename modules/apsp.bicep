@@ -1,8 +1,8 @@
-param name string
+param appServicePlanName string
 param location string = resourceGroup().location
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
-  name: name
+  name: appServicePlanName
   location: location
   sku: {
     capacity: 1

@@ -1,4 +1,4 @@
-param name string
+param webAppName string
 param location string = resourceGroup().location
 param appServicePlanId string
 param dockerRegistryName string
@@ -18,7 +18,7 @@ var dockerAppSettings = [
 
 
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
-  name: name
+  name: webAppName
   location: location
   kind: 'app'
   properties: {
