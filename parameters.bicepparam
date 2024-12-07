@@ -1,7 +1,7 @@
 using './main.bicep'
 
 param location = 'North Europe'
-param containerRegistryName = 'annaacr'
+param containerRegistryName = 'annacr'
 param containerRegistryImageName = 'annaimage'
 param containerRegistryImageVersion = 'latest'
 param appServicePlanName = 'annaasp'
