@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  REGISTRY_LOGIN_SERVER: annacr.azurecr.io
+  REGISTRY_LOGIN_SERVER: annaacr.azurecr.io
   IMAGE_BASE_NAME: annaimage
   WEBAPP_NAME: annawebapp
 
