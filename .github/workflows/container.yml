@@ -41,7 +41,6 @@ jobs:
 
       # Build and push Docker image
       - name: Build and push image
-        working-directory: ./app
         run: |
           docker build . -t ${{ env.REGISTRY_LOGIN_SERVER }}/${{ env.IMAGE_BASE_NAME }}:${{ steps.image-version.outputs.version }}
           docker build . -t ${{ env.REGISTRY_LOGIN_SERVER }}/${{ env.IMAGE_BASE_NAME }}:${{ github.ref_name }}-latest
