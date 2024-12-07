@@ -6,8 +6,9 @@ on:
       - main
 
 env:
-  REGISTRY_LOGIN_SERVER: <annacr>.azurecr.io
-  IMAGE_BASE_NAME: <annaimage>
+  REGISTRY_LOGIN_SERVER: 'annacr.azurecr.io'
+  IMAGE_BASE_NAME: 'annaimage'
+  WEBAPP_NAME: 'annawebapp'
 
 jobs:
   build-and-publish:
@@ -62,5 +63,5 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: <annawebapp>
+          app-name: ${{ env.WEBAPP_NAME }}
           images: ${{ env.REGISTRY_LOGIN_SERVER }}/${{ env.IMAGE_BASE_NAME }}:${{ steps.image-version.outputs.version }}
