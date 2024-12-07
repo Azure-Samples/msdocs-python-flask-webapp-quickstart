@@ -1,11 +1,11 @@
 using './main.bicep'
 
 param location = 'North Europe'
-param containerRegistryName = 'AnnaContainerRegistry'
+param containerRegistryName = 'anna-cr'
 param containerRegistryImageName = 'AnnaImage'
 param containerRegistryImageVersion = 'latest'
-param appServicePlanName = 'AnnaAppServicePlan'
-param webAppName = 'AnnaWebApp'
+param appServicePlanName = 'anna-asp'
+param webAppName = 'anna-webapp'
 
 
 

@@ -27,11 +27,11 @@ module containerRegistryModule './modules/cr.bicep' = {
   }
 }
 
-module appServicePlanModule './modules/cr.bicep' = {
+module appServicePlanModule './modules/apsp.bicep' = {
   name: appServicePlanName
   params: {
+    appServicePlanName: appServicePlanName
     location: location
-    containerRegistryName: containerRegistryName
   }
 }
 
@@ -41,10 +41,10 @@ module webAppModule './modules/web.bicep' = {
     webAppName: webAppName
     location: location
     appServicePlanId: appServicePlanModule.outputs.id
-    dockerRegistryName: containerRegistryName
+    dockerRegistryName: containerRegistryModule.outputs.loginServer
     dockerRegistryImageName: containerRegistryImageName
     dockerRegistryImageVersion: containerRegistryImageVersion
-    dockerRegistryServerUserName: adminUsernameSecretName
-    dockerRegistryServerPassword: adminPasswordSecretName
+    dockerRegistryServerUserName: containerRegistryModule.outputs.adminUsername
+    dockerRegistryServerPassword: containerRegistryModule.outputs.adminPassword
   }
 }
