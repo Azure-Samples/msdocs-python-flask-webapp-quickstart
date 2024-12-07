@@ -39,10 +39,11 @@ module webAppModule './modules/web.bicep' = {
     webAppName: webAppName
     location: location
     appServicePlanId: appServicePlanModule.outputs.id
-    dockerRegistryName: containerRegistryModule.outputs.loginServer
+    containerRegistryName: containerRegistryName
     dockerRegistryImageName: containerRegistryImageName
     dockerRegistryImageVersion: containerRegistryImageVersion
     dockerRegistryServerUserName: containerRegistryModule.outputs.adminUsername
     dockerRegistryServerPassword: containerRegistryModule.outputs.adminPassword
+    
   }
 }
