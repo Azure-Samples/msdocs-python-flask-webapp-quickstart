@@ -5,26 +5,112 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <html>
-   <body>
-     <main>
-        <div class="px-4 py-3 my-2 text-center">
-            <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/azure-icon.svg') }}" alt="Azure Logo" width="192" height="192"/>
-            <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-            <h1 class="display-6 fw-bold text-primary">Welcome to Azure</h1>            
-          </div>
-        <form method="post" action="{{url_for('hello')}}">
-            <div class="col-md-6 mx-auto text-center">
-                <label for="name" class="form-label fw-bold fs-5">Could you please tell me your name?</label>
+    <body>
+        <main>
+<form method="post" action="{{ url_for('hello') }}" class="container mt-5">
+    <!-- Fase -->
+    <div class="mb-3">
+            <label for="fase" class="form-label">Fase</label>
+            <select class="form-select" id="fase" name="fase">
+                    <option value="staging" selected>Staging</option>
+                    <option value="raw">Raw</option>
+                    <option value="master">Master</option>
+                    <option value="procesamiento">Procesamiento</option>
+            </select>
+    </div>
 
-                <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-                    <input type="text" class="form-control" id="name" name="name" style="max-width: 256px;">
-                  </div>            
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
-                  <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Say Hello</button>
-                </div>            
-            </div>
-        </form>
-     </main>      
-   </body>
+    <!-- Proyecto -->
+    <div class="mb-3">
+            <label for="proyecto" class="form-label">Nombre Proyecto</label>
+            <input type="text" class="form-control" id="proyecto" name="proyecto" value="Proyecto">
+    </div>
+
+    <!-- Frecuencia -->
+    <div class="mb-3">
+            <label for="frecuencia" class="form-label">Frecuencia</label>
+            <select class="form-select" id="frecuencia" name="frecuencia">
+                    <option value="Daily" selected>Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly">Monthly</option>
+            </select>
+    </div>
+
+    <!-- Alias Tabla -->
+    <div class="mb-3">
+            <label for="aliastabla" class="form-label">Alias Tabla</label>
+            <input type="text" class="form-control" id="aliastabla" name="aliastabla" value="xdaiccerinfcertificpol">
+    </div>
+
+    <!-- Tipo de Archivo -->
+    <div class="mb-3">
+            <label for="tipo_archivo" class="form-label">Tipo de Archivo</label>
+            <select class="form-select" id="tipo_archivo" name="tipo_archivo">
+                    <option value="csv" selected>csv</option>
+                    <option value="txt">txt</option>
+            </select>
+    </div>
+
+    <!-- Tipo Header -->
+    <div class="mb-3">
+            <label for="tipoheader" class="form-label">Tipo de Header</label>
+            <select class="form-select" id="tipoheader" name="tipoheader">
+                    <option value="sinHeader" selected>Sin Cabecero</option>
+                    <option value="conHeader">Con Cabecero</option>
+            </select>
+    </div>
+
+    <!-- Delimitador -->
+    <div class="mb-3"></div>
+            <label for="delimitador" class="form-label">Delimitador</label>
+            <select class="form-select" id="delimitador" name="delimitador">
+                    <option value=",">,</option>
+                    <option value=";">;</option>
+                    <option value="|">|</option>
+            </select>
+    </div>
+
+    <!-- Ruta Staging -->
+    <div class="mb-3">
+            <label for="ruta_staging" class="form-label">Ruta Staging</label>
+            <input type="text" class="form-control" id="ruta_staging" name="ruta_staging" value="">
+    </div>
+
+    <!-- Ruta Raw -->
+    <div class="mb-3">
+            <label for="ruta_raw" class="form-label">Ruta Raw</label>
+            <input type="text" class="form-control" id="ruta_raw" name="ruta_raw" value="">
+    </div>
+
+    <!-- Ruta Master -->
+    <div class="mb-3">
+            <label for="ruta_master" class="form-label">Ruta Master</label>
+            <input type="text" class="form-control" id="ruta_master" name="ruta_master" value="">
+    </div>
+
+    <!-- Subset -->
+    <div class="mb-3">
+            <label for="subset" class="form-label">Filtro de Particiones</label>
+            <select class="form-select" id="subset" name="subset">
+                    <option value="1" selected>Diaria: partition_data_year_id='${?YEAR}' AND partition_data_month_id='${?MONTH}' AND partition_data_day_id='${?DAY}'</option>
+                    <option value="2">Mensual: partition_data_year_id='${?YEAR}' AND partition_data_month_id='${?MONTH}'</option>
+            </select>
+    </div>
+
+    <!-- Mandatorios -->
+    <div class="mb-3">
+            <label for="mandatorios" class="form-label">Mandatorios</label>
+            <textarea class="form-control" id="mandatorios" name="mandatorios" rows="2">policy_id,insurance_certificate_id,policy_start_date,policy_end_date,coverage_modification_id</textarea>
+    </div>
+
+    <!-- Llaves -->
+    <div class="mb-3">
+            <label for="llaves" class="form-label">Llaves</label>
+            <textarea class="form-control" id="llaves" name="llaves" rows="2">policy_id,insurance_certificate_id,coverage_modification_id</textarea>
+    </div>
+
+    <!-- Botón -->
+    <button type="submit" class="btn btn-primary w-100">Guardar Configuración</button>
+</form>
+</main>      
+</body>
 </html>
