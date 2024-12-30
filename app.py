@@ -50,6 +50,10 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+@app.route('/download/<filename>')
+def download_file(filename):
+    return send_from_directory(directory=os.getcwd(), path=filename, as_attachment=True)
+
 @app.route('/hello', methods=['POST'])
 def hello():
    print('Request for hello page received with form data: %s' % request.form)
@@ -153,20 +157,28 @@ def hello():
        for clave, valor in reemplazosJob.items():
         decoded_stringJob = decoded_stringJob.replace(clave, valor)
        print(f'tabla Final2: {decoded_stringJob}') 
+
+
    #Se crea una variable que guarda la ruta del archivo .conf o .json dentro de una carpeta que lleva el nombre de la fase (staging, raw o master)
        ruta_archivo_conf = tablaes + '-01.conf'
        ruta_archivo_json = tablaes + '-01.json'
-       with open(ruta_archivo_conf, 'w', encoding='utf-8') as nuevo_archivo7:
-        nuevo_archivo7.write(decoded_string)
-       with open(ruta_archivo_json, 'w', encoding='utf-8') as nuevo_archivo5:
-        nuevo_archivo5.write(decoded_stringJob)
+       #with open(ruta_archivo_conf, 'w', encoding='utf-8') as nuevo_archivo7:
+       # nuevo_archivo7.write(decoded_string)
+       #with open(ruta_archivo_json, 'w', encoding='utf-8') as nuevo_archivo5:
+       # nuevo_archivo5.write(decoded_stringJob)
         # Crear un archivo zip con los archivos .conf y .json
-        zip_filename = tablaes + '-config.zip'
-        with zipfile.ZipFile(zip_filename, 'w') as zipf:
-            zipf.write(ruta_archivo_conf)
-            zipf.write(ruta_archivo_json)
-        print(f'Archivo zip creado: {zip_filename}')
-
+       # zip_filename = tablaes + '-config.zip'
+       # with zipfile.ZipFile(zip_filename, 'w') as zipf:
+       #     zipf.write(ruta_archivo_conf)
+       #     zipf.write(ruta_archivo_json)
+       # print(f'Archivo zip creado: {zip_filename}')
+       # os.remove(ruta_archivo_conf)
+       # os.remove(ruta_archivo_json)
+       zip_filename = tablaes + '-config.zip'
+       with zipfile.ZipFile(zip_filename, 'w') as zipf:
+        zipf.writestr(tablaes + '-01.conf', decoded_string)
+        zipf.writestr(tablaes + '-01.json', decoded_stringJob)
+       print(f'Archivo zip creado: {zip_filename}')
 
        #rint(f'tabla Raw: {tabla_raw}')
        #print(f'tabla Master: {tabla_master}')
@@ -175,7 +187,11 @@ def hello():
        print(f'<a href =" {ruta_archivo_json}" target="_black">archivo Json</a>')
        print(f'<a href =" {ruta_archivo_conf}" target="_black">archivo Conf </a>')
        print('Request for hello page received with name=%s' % name)
-       return render_template('hello.html', zip_filename=zip_filename)
+   
+       conf_download_link = url_for('download_file', filename=ruta_archivo_conf)
+       json_download_link = url_for('download_file', filename=ruta_archivo_json)
+       zip_download_link = url_for('download_file', filename=zip_filename)
+       return render_template('hello.html', zip_download_link=zip_download_link)
 
    except Exception as e:
        print(f'Error de Ejecución : {e}')
