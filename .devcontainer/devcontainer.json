@@ -1,0 +1,36 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+    "name": "msdocs-python-flask-webapp-quickstart",
+    "image": "mcr.microsoft.com/devcontainers/python:3.12-bullseye",
+    "features": {
+        "ghcr.io/devcontainers/features/azure-cli:latest": {},
+        "ghcr.io/azure/azure-dev/azd:latest": {}
+    },
+    // Configure tool-specific properties.
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python"
+            },
+
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "ms-python.python"
+            ]
+        }
+    },
+
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    "forwardPorts": [5000],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "",
+
+	// Use 'postStartCommand' to run commands after the container is started (more frequently than create).
+	"postStartCommand": "pip install --user -r requirements.txt",
+
+    // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+    "remoteUser": "vscode"
+}
