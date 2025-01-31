@@ -1,5 +1,17 @@
 import os
 
+from langchain_openai import AzureChatOpenAI
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+azure_endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
+azure_deployment = os.environ['AZURE_OPENAI_DEPLOYMENT_NAME']
+model_name = os.environ['OPENAI_MODEL_NAME']
+api_version = os.environ['AZURE_OPENAI_API_VERSION']
+
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 
@@ -18,12 +30,26 @@ def favicon():
 
 @app.route('/hello', methods=['POST'])
 def hello():
-   name = request.form.get('name')
+    req = request.form.get('req')
 
-   if name:
-       print('Request for hello page received with name=%s' % name)
-       return render_template('hello.html', name = name)
-   else:
+    token_provider = get_bearer_token_provider(
+        DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
+    )
+
+    llm = AzureChatOpenAI(
+        api_version=api_version,
+        azure_deployment=azure_deployment,
+        azure_endpoint=azure_endpoint,
+        model_name=model_name,
+        azure_ad_token_provider=token_provider
+    )
+
+    text = llm.invoke(req)
+
+    if req:
+       print('Request for hello page received with req=%s' % req)
+       return render_template('hello.html', req=text.content)
+    else:
        print('Request for hello page received with no name or blank name -- redirecting')
        return redirect(url_for('index'))
 
