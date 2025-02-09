@@ -1,2 +1,4 @@
 Flask==3.0.0
-gunicorn
+openai==1.61.1
+langchain-openai==0.3.4
+gunicorn==23.0.0
