@@ -1,9 +1,9 @@
 import os 
 import base64
-import openai
-from openai import AzureOpenAI  
+# import openai
+from langchain_openai import AzureOpenAI  
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
-print(openai.__version__)
+# print(openai.__version__)
 
 # Azure OpenAI
 api_key = os.environ['AZURE_OPENAI_API_KEY'] = dbutils.secrets.get(scope="yyang_secret_scope", key="AZURE_OPENAI_API_KEY")
@@ -62,5 +62,5 @@ def hello():
        return redirect(url_for('index'))
    
 if __name__ == '__main__':
-   app.run()
+   app.run(host='0.0.0.0', port=5000, debug=False)
 
