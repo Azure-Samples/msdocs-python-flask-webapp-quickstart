@@ -1,12 +1,12 @@
 import os
 
-import openai
+# import openai
 # from langchain_openai import AzureOpenAI
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 from openai import AzureOpenAI
 
-print(openai.__version__)
+# print(openai.__version__)
 
 # Replace with your Key Vault name
 KVUri = "https://dfci-key-vault.vault.azure.net/"

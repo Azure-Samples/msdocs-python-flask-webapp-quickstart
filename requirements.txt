@@ -1,8 +1,8 @@
 Flask==3.0.0
 openai==1.61.1
-langchain-openai==0.3.4
+#langchain-openai==0.3.4
 gunicorn==23.0.0
 azure-identity==1.19.0
-azure-core==1.33.0
+#azure-core==1.32.0
 azure-keyvault-secrets==4.9.0
 
