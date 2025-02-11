@@ -72,6 +72,9 @@ jobs:
           app-name: 'DFCI-Demo-App'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_324D245F747E4BD9BCF6CFAFBDAF887D }}
+          package: '.'
         env:
-          ORYX_ENV_TYPE: "AppService"
-          ORYX_CMD_LINE: "oryx build --platform python --platform-version ${{ env.PYTHON_VERSION }}"
+          SCM_DO_BUILD_DURING_DEPLOYMENT: '1'
+          ENABLE_DYNAMIC_INSTALL: 'true'
+          PLATFORM_NAME: 'python'
+          PLATFORM_VERSION: '${{ env.PYTHON_VERSION }}'
