@@ -10,6 +10,9 @@ on:
       - DFCI-dev
   workflow_dispatch:
 
+env:
+  PYTHON_VERSION: '3.11.10'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,7 +25,7 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11.10'
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Create and start virtual environment
         run: |
@@ -69,3 +72,6 @@ jobs:
           app-name: 'DFCI-Demo-App'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_324D245F747E4BD9BCF6CFAFBDAF887D }}
+        env:
+          ORYX_ENV_TYPE: "AppService"
+          ORYX_CMD_LINE: "oryx build --platform python --platform-version ${{ env.PYTHON_VERSION }}"
