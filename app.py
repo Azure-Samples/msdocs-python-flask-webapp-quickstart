@@ -54,14 +54,14 @@ from openai import AzureOpenAI
 #: plan B, use fernet mechanism to decode.
 from cryptography.fernet import Fernet
 # Read the key from the file
-with open("./fernet/fernet_key.txt", "rb") as key_file:
+with open("./static/fernet/fernet_key.txt", "rb") as key_file:
     key = key_file.read()
 
 # Instantiate a Fernet instance with the key
 cipher_suite = Fernet(key)
 
 # Read the encrypted data from the file
-with open("./fernet/encrypted_key.txt", "rb") as file:
+with open("./static/fernet/encrypted_key.txt", "rb") as file:
     encrypted_data_from_file = file.read()
 
 # Decrypt the data
