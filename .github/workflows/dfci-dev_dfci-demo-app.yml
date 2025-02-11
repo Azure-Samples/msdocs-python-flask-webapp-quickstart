@@ -68,4 +68,4 @@ jobs:
         with:
           app-name: 'DFCI-Demo-App'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6CF88F8896764E3AB43AE47CEC2343A9 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_324D245F747E4BD9BCF6CFAFBDAF887D }}
