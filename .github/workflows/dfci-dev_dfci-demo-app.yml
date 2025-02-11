@@ -38,7 +38,7 @@ jobs:
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r -x ./venv
+        run: zip release.zip ./* -r -x "venv/*"
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -72,9 +72,3 @@ jobs:
           app-name: 'DFCI-Demo-App'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_324D245F747E4BD9BCF6CFAFBDAF887D }}
-          package: '.'
-        env:
-          SCM_DO_BUILD_DURING_DEPLOYMENT: '1'
-          ENABLE_DYNAMIC_INSTALL: 'true'
-          PLATFORM_NAME: 'python'
-          PLATFORM_VERSION: '${{ env.PYTHON_VERSION }}'
