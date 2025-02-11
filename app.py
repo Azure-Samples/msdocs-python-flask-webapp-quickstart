@@ -2,14 +2,31 @@
 import sys
 print("Python version:")
 print(sys.version)
-
+#
 import pkg_resources
 installed_packages = [pkg.key for pkg in pkg_resources.working_set]
 print("Packages from", sys.path)
 print(installed_packages)
+#
+import subprocess
+# Run pip list command
+result = subprocess.run(['pip', 'list'], stdout=subprocess.PIPE)
+print(result.stdout.decode('utf-8'))
 
+# move the term like this "'/tmp/8dd4a6c787463f2/antenv/lib/python3.11/site-packages'" built by oryx to be 0 index of
+# sys.path variable, i.e., the library paths.
+try:
+    sys.path.insert(0, sys.path.pop(sys.path.index(next(filter(lambda x: "antenv" in x, sys.path)))))
+except:
+    pass
+print("After reordering library path loading order, now we have Packages from", sys.path)
 
+import subprocess
+# Run pip list command
+result = subprocess.run(['pip', 'list'], stdout=subprocess.PIPE)
+print(result.stdout.decode('utf-8'))
 
+# -----app script formally start here--------
 import os
 # import openai
 # from langchain_openai import AzureOpenAI
