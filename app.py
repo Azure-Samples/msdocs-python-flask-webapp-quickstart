@@ -30,26 +30,44 @@ print(result.stdout.decode('utf-8'))
 import os
 # import openai
 # from langchain_openai import AzureOpenAI
-from azure.identity import DefaultAzureCredential
-from azure.keyvault.secrets import SecretClient
+# from azure.identity import DefaultAzureCredential
+# from azure.keyvault.secrets import SecretClient
 from openai import AzureOpenAI
 
 # print(openai.__version__)
-
-# Replace with your Key Vault name
-KVUri = "https://dfci-key-vault.vault.azure.net/"
-secretName = "AZURE-OPENAI-API-KEY"
-
-# Authenticate and create a client
-credential = DefaultAzureCredential()
-client = SecretClient(vault_url=KVUri, credential=credential)
-# get secret
-retrieved_secret = client.get_secret(secretName)
-print(retrieved_secret)
+#
+# # Replace with your Key Vault name
+# KVUri = "https://dfci-key-vault.vault.azure.net/"
+# secretName = "AZURE-OPENAI-API-KEY"
+#
+# # Authenticate and create a client
+# credential = DefaultAzureCredential()
+# client = SecretClient(vault_url=KVUri, credential=credential)
+# # get secret
+# retrieved_secret = client.get_secret(secretName)
+# print(retrieved_secret)
 
 # Azure OpenAI
 # DONE: secure api_key by using one of the secret scope in Azure or databricks
-api_key = os.environ['AZURE_OPENAI_API_KEY'] = retrieved_secret.value
+#api_key = os.environ['AZURE_OPENAI_API_KEY'] = retrieved_secret.value
+
+#: plan B, use fernet mechanism to decode.
+from cryptography.fernet import Fernet
+# Read the key from the file
+with open("./fernet/fernet_key.txt", "rb") as key_file:
+    key = key_file.read()
+
+# Instantiate a Fernet instance with the key
+cipher_suite = Fernet(key)
+
+# Read the encrypted data from the file
+with open("./fernet/encrypted_key.txt", "rb") as file:
+    encrypted_data_from_file = file.read()
+
+# Decrypt the data
+decrypted_data = cipher_suite.decrypt(encrypted_data_from_file).decode()
+
+api_key = os.environ['AZURE_OPENAI_API_KEY'] = decrypted_data
 # api_version = os.environ['AZURE_OPENAI_API_VERSION'] = "2024-10-01" # from Resource JSON in the portal of the specific Azure OpenAI page.
 api_version = os.environ[
     'AZURE_OPENAI_API_VERSION'] = "2024-05-01-preview"  # from Chat playground Sample Code (key authentication)
