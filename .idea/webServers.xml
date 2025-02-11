@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="16cfb102-8c13-4baa-b841-1d1e7b73c64a" name="DFCI-FTPS" url="http://waws-prod-blu-547.ftp.azurewebsites.windows.net/site/wwwroot">
+        <fileTransfer accessType="FTPS" host="waws-prod-blu-547.ftp.azurewebsites.windows.net/site/wwwroot" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

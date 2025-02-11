@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="waws-prod-blu-547.ftp.azurewebsites.windows.net/site/wwwroot" id="b355d546-8cbf-456d-bff7-bb9169f788a6" port="22" customName="DFCI-SFTP" nameFormat="CUSTOM" username="DFCI-Demo-App\$DFCI-Demo-App" useOpenSSHConfig="false">
+        <option name="customName" value="DFCI-SFTP" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>
