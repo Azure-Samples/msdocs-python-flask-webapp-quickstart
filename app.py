@@ -152,7 +152,7 @@ def favicon():
                                mimetype='image/vnd.microsoft.icon')
 
 
-@app.route('/hello', methods=['POST'])
+@app.route('/api/hello', methods=['POST'])
 def hello():
     req = request.form.get('req')
 
