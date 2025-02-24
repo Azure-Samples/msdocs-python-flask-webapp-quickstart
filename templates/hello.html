@@ -15,12 +15,12 @@
                 It is nice to meet you!
             </p>
             <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg px-4 gap-3">Back home</a>
+            <div id='chart'></div>
             <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
             <script type='text/javascript'>
               var graphs = {{graphJSON | safe}};
               Plotly.plot('chart',graphs,{});
             </script>
-            <div id='chart'></div>
           </div>
      </main>      
    </body>
