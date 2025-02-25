@@ -3,7 +3,7 @@ import os
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 
-from utility import get_plotly_plot
+from utility import get_plotly_plot_wisam
 
 app = Flask(__name__)
 
@@ -24,7 +24,7 @@ def hello():
 
    if name:
        print('Request for hello page received with name=%s' % name)
-       return render_template('hello.html', name = name, graphJSON=get_plotly_plot())
+       return render_template('hello.html', name = name, graphJSON=get_plotly_plot_wisam())
 
    print('Request for hello page received with no name or blank name -- redirecting')
    return redirect(url_for('index'))
