@@ -23,8 +23,8 @@ def get_plotly_plot_wisam():
     ])
 
     ### Subplot 1: Plot_pres (Pressure Losses) ###
-    main_df = read_section_from_file("Plot_pres_Data.txt", "Main Pressure Line Data:")
-    body_df = read_section_from_file("Plot_pres_Data.txt", "Body Pressure Line Data:")
+    main_df = read_section_from_file("./Plot_pres_Data.txt", "Main Pressure Line Data:")
+    body_df = read_section_from_file("./Plot_pres_Data.txt", "Body Pressure Line Data:")
 
     for idx, row in main_df.iterrows():
         fig.add_trace(go.Scatter(
@@ -50,7 +50,7 @@ def get_plotly_plot_wisam():
     fig.update_yaxes(title_text="Measured Depth (MD) [m]", autorange="reversed", row=1, col=1)
 
     ### Subplot 2: Plot_oc_ecd_2 (ECD & Cutting Loading) ###
-    filename_oc = "Plot_oc_ecd_2_Data.txt"
+    filename_oc = "./Plot_oc_ecd_2_Data.txt"
     df_hLine6 = read_section_from_file(filename_oc, "hLine6 data (ECD vs Cum_Len_Arr):")
     df_hLine8 = read_section_from_file(filename_oc, "hLine8 data (rho_mud_a vs Cum_Len_Arr(end)):")
     df_hLine7 = read_section_from_file(filename_oc, "hLine7 data (Sec{m}.MudProperties.rho_mud vs index):")
@@ -84,7 +84,7 @@ def get_plotly_plot_wisam():
     fig.update_yaxes(autorange="reversed", row=1, col=2)  # No Y-axis title
 
     ### Subplot 3: Plot_slip_2 (Cutting Velocity) ###
-    df_slip = pd.read_csv("Plot_slip_2_Data.txt", delimiter='\t', skipinitialspace=True)
+    df_slip = pd.read_csv("./Plot_slip_2_Data.txt", delimiter='\t', skipinitialspace=True)
     df_slip.columns = df_slip.columns.str.strip()  # Clean header names
 
     added_va = False
@@ -133,10 +133,10 @@ def get_plotly_plot_wisam():
 
     ### Subplot 4: Combined Plot (WBS & DS: WB Schematic & Drill.-String) ###
     # Read WBS data from Plot_wbs_Data.txt
-    left_df = read_section_from_file("Plot_wbs_Data.txt", "Left Plot Data (X vs Y):")
-    right_df = read_section_from_file("Plot_wbs_Data.txt", "Right Plot Data (X vs Y):")
+    left_df = read_section_from_file("./Plot_wbs_Data.txt", "Left Plot Data (X vs Y):")
+    right_df = read_section_from_file("./Plot_wbs_Data.txt", "Right Plot Data (X vs Y):")
     # Read DS data from Plot_ds_Data.txt (assumes header: i x1 x2 y1 y2 x3 x4)
-    df_ds = pd.read_csv("Plot_ds_Data.txt", sep=r'\s+')
+    df_ds = pd.read_csv("./Plot_ds_Data.txt", sep=r'\s+')
 
     # Create an HSV colormap (64 colors) using the new interface.
     cmap = matplotlib.colormaps["hsv"].resampled(64)
