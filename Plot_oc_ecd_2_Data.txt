@@ -1,0 +1,17 @@
+hLine6 data (ECD vs Cum_Len_Arr):
+Index	ECD	Cum_Len_Arr
+1	1114.097734	4093.000000
+2	1111.524468	4243.000000
+3	1108.363728	4443.000000
+4	1107.617511	4493.000000
+5	1107.529079	4499.000000
+6	1107.514364	4500.000000
+
+hLine8 data (rho_mud_a vs Cum_Len_Arr(end)):
+rho_mud_a	Cum_Len_Arr_end
+1041.308632	4500.000000
+
+hLine7 data (Sec{m}.MudProperties.rho_mud vs index):
+Index	MudProperties_rho_mud
+1	1000.000000
+
