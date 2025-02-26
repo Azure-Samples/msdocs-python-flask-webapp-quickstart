@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
    print('Request for index page received')
-   return render_template('index.html')
+   return render_template('index.html', graphJSON=get_plotly_plot_wisam())
 
 @app.route('/favicon.ico')
 def favicon():
