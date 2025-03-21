@@ -2,30 +2,6 @@
 import sys
 print("Python version:")
 print(sys.version)
-#
-import pkg_resources
-installed_packages = [pkg.key for pkg in pkg_resources.working_set]
-print("Packages from", sys.path)
-print(installed_packages)
-#
-import subprocess
-# Run pip list command
-result = subprocess.run(['pip', 'list'], stdout=subprocess.PIPE)
-print(result.stdout.decode('utf-8'))
-
-# move the term like this "'/tmp/8dd4a6c787463f2/antenv/lib/python3.11/site-packages'" built by oryx to be 0 index of
-# sys.path variable, i.e., the library paths.
-try:
-    sys.path.insert(0, sys.path.pop(sys.path.index(next(filter(lambda x: "antenv" in x, sys.path)))))
-except:
-    pass
-print("After reordering library path loading order, now we have Packages from", sys.path)
-
-import subprocess
-# Run pip list command
-result = subprocess.run(['pip', 'list'], stdout=subprocess.PIPE)
-print(result.stdout.decode('utf-8'))
-
 # -----app script formally start here--------
 import os
 # import openai
@@ -74,83 +50,21 @@ api_version = os.environ[
 azure_deployment = os.environ['AZURE_OPENAI_ENDPOINT'] = "https://dfci-aoai-test.openai.azure.com/"
 model_name = os.environ['AZURE_OPENAI_MODEL_NAME'] = "gpt-4o"
 
-#
-# # Alternatively, we don't use managed Azure identity, and use API key authentication.
-# client = AzureOpenAI(
-#     api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-#     api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
-#     azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
-#     )
-#
-# user_input = "Could you recommend 4 different stocks across 4 different sectors to buy? Please include tech, healthcare, finance, and energy."
-#
-# chat_prompt = [
-#     {
-#         "role": "system",
-#         "content": [
-#             {
-#                 "type": "text",
-#                 "text": "Scan the stock market to recommend stocks with strong fundamentals and technical indicators that indicate a good buy price. Provide comprehensive analysis incorporating fundamental data, technical indicators, and market sentiment. Given the complexity of this task, prioritize delivering depth over the total number of stock analyses offered. Recommended output can reasonably focus on 2-3 stocks."
-#             }
-#         ]
-#     },
-#     {
-#         "role": "user",
-#         "content": [
-#             {
-#                 "type": "text",
-#                 "text": f"{user_input}"
-#             }
-#         ]
-#     },
-#     {
-#         "role": "assistant",
-#         "content": [
-#             {
-#                 "type": "text",
-#                 "text": ""
-#             }
-#         ]
-#     }
-# ]
-#
-# chat_prompt = chat_prompt
-#
-# # Include speech result if speech is enabled
-# messages = chat_prompt
-#
-# completion = client.chat.completions.create(
-#     model=model_name,
-#     messages=messages,
-#     max_tokens=4096,
-#     temperature=0.7,
-#     top_p=0.95,
-#     frequency_penalty=0,
-#     presence_penalty=0,
-#     stop=None,
-#     stream=False
-# )
-#
-# print(completion.to_json())
-#
 
 # make sure we have flask >3.0. In runtime ML 15.4, it is old version of flask, so will fail.
 from flask import (Flask, redirect, render_template, request, send_from_directory, url_for)
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def index():
     print('Request for index page received')
     return render_template('index.html')
 
-
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico',
                                mimetype='image/vnd.microsoft.icon')
-
 
 @app.route('/api/hello', methods=['POST'])
 def hello():
