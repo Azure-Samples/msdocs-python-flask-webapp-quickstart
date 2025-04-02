@@ -60,6 +60,7 @@ module web './core/host/appservice.bicep' = {
     appServicePlanId: appServicePlan.outputs.id
     runtimeName: 'python'
     runtimeVersion: '3.13'
+    scmDoBuildDuringDeployment: true
     tags: union(tags, { 'azd-service-name': 'web' })
   }
 }
